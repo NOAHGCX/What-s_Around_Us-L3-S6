@@ -38,12 +38,27 @@
       <h1>This is an about page</h1>
       <div class="media">
         <div class="media-body">
-          <h5 class="mt-0 mb-1">Media object</h5>
-          <p>I know there will be sacrifice but that's the price. Are you brave enough to let me see your peacock? Be
-            your teenage dream tonight. Uh-huh, I see you..</p>
+          <MediaSlottedComponent>
+            <template v-slot:left-side>
+              <h5 class="mt-0">News Title</h5>
+              <p>She'll turn cold as a freezer. At the eh-end of it all. Stinging like a bee I earned my stripes. Bikinis,
+              zucchinis, Martinis, no weenies. I hope you got a healthy appetite. We can dance, until we die, you and I,
+              will be young forever. We're living the life. We're doing it right. Word on the street, you got somethin' to
+              show me, me.</p>
+            </template>
+            <template v-slot:right-side>
+                <img src="" alt="main_news_image">
+            </template>
+          </MediaSlottedComponent>
         </div>
-        <img src="../assets/img/New-York-about.jpg" class="ml-3" alt="...">
       </div>
+      <div class="media">
+        <div class="media-body">
+          <h5 class="mt-0">More news</h5>
+          <CardCarousel :newsList="newsList" />        
+        </div>
+      </div>
+
       <div class="media">
         <img src="../assets/img/New-York-about.jpg" class="align-self-center mr-3" alt="...">
         <div class="media-body">
@@ -57,9 +72,51 @@
             you're on her plane. I'll be your gift, give you something good to celebrate.</p>
         </div>
       </div>
+
     </div>
   </div>
 </template>
+
+<script>
+    import MediaSlottedComponent from '@/components/MediaSlottedComponent.vue';
+    import CardCarousel from '@/components/CardCarousel.vue';
+
+    export default {
+      name: 'AboutView',
+      components: {
+        MediaSlottedComponent,
+        CardCarousel
+      },
+
+      data() {
+            return {
+              newsList: [
+                    {
+                    "id": 1,
+                    "newsTitle": "News 1",
+                    "newsImage": "logo.png",
+                    "newsLink":"google.com",
+                    "newsText":"text news 1"
+                    },
+                    {
+                    "id": 2,
+                    "newsTitle": "News 2",
+                    "newsImage": "logo.png",
+                    "newsLink":"google.com",
+                    "newsText":"text news 2"
+                    },
+                    {
+                    "id": 3,
+                    "newsTitle": "News 3",
+                    "newsImage": "logo.png",
+                    "newsLink":"google.com",
+                    "newsText":"text news 3"
+                    }
+                ]
+            }
+        },
+    }
+</script>
 
 <style>
   .about .all {
