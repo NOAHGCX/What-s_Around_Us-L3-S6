@@ -49,27 +49,37 @@
 
 <script>
   import CardCarousel from '@/components/CardCarousel.vue';
-  const axios = require('axios').default;
 
-  axios.get('https://newsapi.org/v2/everything?apiKey=974f46c4dbf74801aa8dd40217ed3ab9&language=fr&q=montreal')
-    .then(function (response) {
-      // handle success
-      console.log(response);
-    })
-    .catch(function (error) {
-      // handle error
-      console.log(error);
-    })
-    .finally(function () {
-      // always executed
-    });
 
   export default {
     name: 'AboutView',
     components: {
       CardCarousel
     },
+    mounted() {
+      const language = navigator.language;
+      const languageCode = language.split('-');
+      console.log(languageCode[0]);
+      this.getCityNews(languageCode[0], "Paris");
+    },
+    methods: {
+      getCityNews(language, city) {
+        const axios = require('axios').default;
 
+        axios.get("https://newsapi.org/v2/everything?apiKey=974f46c4dbf74801aa8dd40217ed3ab9&language="+language+"&q="+city)
+          .then(function (response) {
+            // handle success
+            console.log(response);
+          })
+          .catch(function (error) {
+            // handle error
+            console.log(error);
+          })
+          .finally(function () {
+            // always executed
+          });
+      }
+    },
     data() {
       return {
         newsList: [{
@@ -95,7 +105,7 @@
           }
         ]
       }
-    },
+    }
   }
 </script>
 
