@@ -38,41 +38,8 @@
       <h1>This is an about page</h1>
       <div class="media">
         <div class="media-body">
-          <MediaSlottedComponent>
-            <template v-slot:left-side>
-              <h5 class="mt-0">News Title</h5>
-              <p>She'll turn cold as a freezer. At the eh-end of it all. Stinging like a bee I earned my stripes.
-                Bikinis,
-                zucchinis, Martinis, no weenies. I hope you got a healthy appetite. We can dance, until we die, you and
-                I,
-                will be young forever. We're living the life. We're doing it right. Word on the street, you got
-                somethin' to
-                show me, me.</p>
-            </template>
-            <template v-slot:right-side>
-              <img src="" alt="main_news_image">
-            </template>
-          </MediaSlottedComponent>
-        </div>
-      </div>
-      <div class="media">
-        <div class="media-body">
           <h5 class="mt-0">More news</h5>
           <CardCarousel :newsList="newsList" />
-        </div>
-      </div>
-
-      <div class="media">
-        <img src="../assets/img/New-York-about.jpg" class="align-self-center mr-3" alt="...">
-        <div class="media-body">
-          <h5 class="mt-0">Center-aligned media</h5>
-          <p>She'll turn cold as a freezer. At the eh-end of it all. Stinging like a bee I earned my stripes. Bikinis,
-            zucchinis, Martinis, no weenies. I hope you got a healthy appetite. We can dance, until we die, you and I,
-            will be young forever. We're living the life. We're doing it right. Word on the street, you got somethin' to
-            show me, me.</p>
-          <p class="mb-0">Wanna see the show in 3D, a movie. They say, be afraid you're not like the others, futuristic
-            lover. Open up your heart. So I sat quietly, agreed politely. Last Friday night. Yeah, you're lucky if
-            you're on her plane. I'll be your gift, give you something good to celebrate.</p>
         </div>
       </div>
 
@@ -81,7 +48,6 @@
 </template>
 
 <script>
-  import MediaSlottedComponent from '@/components/MediaSlottedComponent.vue';
   import CardCarousel from '@/components/CardCarousel.vue';
   const axios = require('axios').default;
 
@@ -101,7 +67,6 @@
   export default {
     name: 'AboutView',
     components: {
-      MediaSlottedComponent,
       CardCarousel
     },
 
