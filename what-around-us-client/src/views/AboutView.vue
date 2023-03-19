@@ -41,13 +41,16 @@
           <MediaSlottedComponent>
             <template v-slot:left-side>
               <h5 class="mt-0">News Title</h5>
-              <p>She'll turn cold as a freezer. At the eh-end of it all. Stinging like a bee I earned my stripes. Bikinis,
-              zucchinis, Martinis, no weenies. I hope you got a healthy appetite. We can dance, until we die, you and I,
-              will be young forever. We're living the life. We're doing it right. Word on the street, you got somethin' to
-              show me, me.</p>
+              <p>She'll turn cold as a freezer. At the eh-end of it all. Stinging like a bee I earned my stripes.
+                Bikinis,
+                zucchinis, Martinis, no weenies. I hope you got a healthy appetite. We can dance, until we die, you and
+                I,
+                will be young forever. We're living the life. We're doing it right. Word on the street, you got
+                somethin' to
+                show me, me.</p>
             </template>
             <template v-slot:right-side>
-                <img src="" alt="main_news_image">
+              <img src="" alt="main_news_image">
             </template>
           </MediaSlottedComponent>
         </div>
@@ -55,7 +58,7 @@
       <div class="media">
         <div class="media-body">
           <h5 class="mt-0">More news</h5>
-          <CardCarousel :newsList="newsList" />        
+          <CardCarousel :newsList="newsList" />
         </div>
       </div>
 
@@ -78,44 +81,57 @@
 </template>
 
 <script>
-    import MediaSlottedComponent from '@/components/MediaSlottedComponent.vue';
-    import CardCarousel from '@/components/CardCarousel.vue';
+  import MediaSlottedComponent from '@/components/MediaSlottedComponent.vue';
+  import CardCarousel from '@/components/CardCarousel.vue';
+  const axios = require('axios').default;
 
-    export default {
-      name: 'AboutView',
-      components: {
-        MediaSlottedComponent,
-        CardCarousel
-      },
+  axios.get('https://newsapi.org/v2/everything?apiKey=974f46c4dbf74801aa8dd40217ed3ab9&language=fr&q=montreal')
+    .then(function (response) {
+      // handle success
+      console.log(response);
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    })
+    .finally(function () {
+      // always executed
+    });
 
-      data() {
-            return {
-              newsList: [
-                    {
-                    "id": 1,
-                    "newsTitle": "News 1",
-                    "newsImage": "logo.png",
-                    "newsLink":"google.com",
-                    "newsText":"text news 1"
-                    },
-                    {
-                    "id": 2,
-                    "newsTitle": "News 2",
-                    "newsImage": "logo.png",
-                    "newsLink":"google.com",
-                    "newsText":"text news 2"
-                    },
-                    {
-                    "id": 3,
-                    "newsTitle": "News 3",
-                    "newsImage": "logo.png",
-                    "newsLink":"google.com",
-                    "newsText":"text news 3"
-                    }
-                ]
-            }
-        },
-    }
+  export default {
+    name: 'AboutView',
+    components: {
+      MediaSlottedComponent,
+      CardCarousel
+    },
+
+    data() {
+      return {
+        newsList: [{
+            "id": 1,
+            "newsTitle": "News 1",
+            "newsImage": "logo.png",
+            "newsLink": "google.com",
+            "newsText": "text news 1"
+          },
+          {
+            "id": 2,
+            "newsTitle": "News 2",
+            "newsImage": "logo.png",
+            "newsLink": "google.com",
+            "newsText": "text news 2"
+          },
+          {
+            "id": 3,
+            "newsTitle": "News 3",
+            "newsImage": "logo.png",
+            "newsLink": "google.com",
+            "newsText": "text news 3"
+          }
+        ]
+      }
+    },
+  }
 </script>
 
 <style>
