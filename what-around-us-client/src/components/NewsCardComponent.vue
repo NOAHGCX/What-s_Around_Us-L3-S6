@@ -7,7 +7,7 @@
         </div>
 
         <div class="card-body">
-            <p class="card-text">{{ newsText }}</p>
+            <p class="card-text">{{ newsText.substr(0, 100) }}...</p>
         </div>
     </div>
 </template>
@@ -26,7 +26,7 @@
 
 <style>
     .card {
-        width: 20rem;
+        width: 18.5rem;
     }
     .card a{
         text-decoration: none;

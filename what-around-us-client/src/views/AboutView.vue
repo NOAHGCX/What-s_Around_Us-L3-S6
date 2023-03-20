@@ -36,15 +36,17 @@
     </header>
     <div class="container-fluid all">
       <h1>News</h1>
-      <vueper-slides class="no-shadow" :visible-slides="3" slide-multiple :gap="3" 
-        :dragging-distance="200" :breakpoints="{ 800: { visibleSlides: 2, slideMultiple: 2 } }">
-        <vueper-slide v-for="(slide, i) in NewsResult" :key="i">
-          <template #content>
-            <NewsCardComponent :newsLink="slide.url" :newsImage="slide.urlToImage"
-          :newsTitle="slide.title" :newsText="slide.description" />
-          </template>
-        </vueper-slide>
-      </vueper-slides>
+      <div class="container">
+        <vueper-slides class="no-shadow" :bullets="false" slide-multiple fixed-height="58vh" :visible-slides="3"
+          :gap="3" :dragging-distance="200" :breakpoints="{ 800: { visibleSlides: 2, slideMultiple: 2 } }">
+          <vueper-slide v-for="(slide, i) in NewsResult" :key="i">
+            <template #content>
+              <NewsCardComponent :newsLink="slide.url" :newsImage="slide.urlToImage" :newsTitle="slide.title"
+                :newsText="slide.description" />
+            </template>
+          </vueper-slide>
+        </vueper-slides>
+      </div>
     </div>
   </div>
 </template>
@@ -70,11 +72,10 @@
     mounted() {
       const languageNav = navigator.language;
       const languageCode = languageNav.split('-');
-      const city = "Paris";
       const language = languageCode[0];
       const axios = require('axios').default;
       axios.get("https://newsapi.org/v2/everything?apiKey=974f46c4dbf74801aa8dd40217ed3ab9&language=" + language +
-          "&q=" + city).then(response => {
+          "&q=" + this.city).then(response => {
           console.log(response.data.articles);
           this.NewsResult = response.data.articles;
         })
@@ -85,6 +86,7 @@
     data() {
       return {
         NewsResult: [],
+        city: "Paris",
         newsList: [{
             "id": 1,
             "newsTitle": "News 1",
