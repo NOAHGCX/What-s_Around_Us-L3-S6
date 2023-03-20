@@ -14,7 +14,8 @@
     "core-js": "^3.8.3",
     "newsapi": "^2.4.1",
     "vue": "^3.2.47",
-    "vue-router": "^4.0.3"
+    "vue-router": "^4.0.3",
+    "vueperslides": "^3.5.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

@@ -35,53 +35,56 @@
       </div>
     </header>
     <div class="container-fluid all">
-      <h1>This is an about page</h1>
-      <div class="media">
-        <div class="media-body">
-          <h5 class="mt-0">More news</h5>
-          <CardCarousel :newsList="newsList" />
-        </div>
-      </div>
-
+      <h1>News</h1>
+      <vueper-slides class="no-shadow" :visible-slides="3" slide-multiple :gap="3" 
+        :dragging-distance="200" :breakpoints="{ 800: { visibleSlides: 2, slideMultiple: 2 } }">
+        <vueper-slide v-for="(slide, i) in NewsResult" :key="i">
+          <template #content>
+            <NewsCardComponent :newsLink="slide.url" :newsImage="slide.urlToImage"
+          :newsTitle="slide.title" :newsText="slide.description" />
+          </template>
+        </vueper-slide>
+      </vueper-slides>
     </div>
   </div>
 </template>
 
 <script>
-  import CardCarousel from '@/components/CardCarousel.vue';
+  import NewsCardComponent from '@/components/NewsCardComponent.vue';
+
+  import {
+    VueperSlides,
+    VueperSlide
+  } from 'vueperslides'
+  import 'vueperslides/dist/vueperslides.css'
 
 
   export default {
     name: 'AboutView',
     components: {
-      CardCarousel
+      NewsCardComponent,
+      VueperSlides,
+      VueperSlide
     },
+    methods: {},
     mounted() {
-      const language = navigator.language;
-      const languageCode = language.split('-');
-      console.log(languageCode[0]);
-      this.getCityNews(languageCode[0], "Paris");
-    },
-    methods: {
-      getCityNews(language, city) {
-        const axios = require('axios').default;
-
-        axios.get("https://newsapi.org/v2/everything?apiKey=974f46c4dbf74801aa8dd40217ed3ab9&language="+language+"&q="+city)
-          .then(function (response) {
-            // handle success
-            console.log(response);
-          })
-          .catch(function (error) {
-            // handle error
-            console.log(error);
-          })
-          .finally(function () {
-            // always executed
-          });
-      }
+      const languageNav = navigator.language;
+      const languageCode = languageNav.split('-');
+      const city = "Paris";
+      const language = languageCode[0];
+      const axios = require('axios').default;
+      axios.get("https://newsapi.org/v2/everything?apiKey=974f46c4dbf74801aa8dd40217ed3ab9&language=" + language +
+          "&q=" + city).then(response => {
+          console.log(response.data.articles);
+          this.NewsResult = response.data.articles;
+        })
+        .catch(error => {
+          console.log(error);
+        });
     },
     data() {
       return {
+        NewsResult: [],
         newsList: [{
             "id": 1,
             "newsTitle": "News 1",

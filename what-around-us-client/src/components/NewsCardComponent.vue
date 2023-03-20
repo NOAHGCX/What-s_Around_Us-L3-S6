@@ -1,8 +1,9 @@
 <template>
-    <div class="card" @click="router.go({newsLink})">
+    <div class="card">
         <div class="card-header">
-            <img :src="require('@/assets/'+ newsImage)" class="card-img-top" alt="Card image cap">
-            <h5 class="card-title">{{ newsTitle }}</h5>
+            <a :href="newsLink" target="_blank">
+                <img :src="newsImage" class="card-img-top" alt="">
+            <h5 class="card-title">{{ newsTitle }}</h5></a>
         </div>
 
         <div class="card-body">
@@ -12,22 +13,23 @@
 </template>
 
 <script>
-export default {
-    name: "NewsCardComponent",
-    props: {
-        newsLink: String,
-        newsImage: String,
-        newsTitle: String,
-        newsText: String,
-    },
-}
-
+    export default {
+        name: "NewsCardComponent",
+        props: {
+            newsLink: String,
+            newsImage: String,
+            newsTitle: String,
+            newsText: String,
+        },
+    }
 </script>
 
 <style>
     .card {
-        width: 13rem;
+        width: 20rem;
+    }
+    .card a{
+        text-decoration: none;
         cursor: pointer;
     }
-
 </style>
