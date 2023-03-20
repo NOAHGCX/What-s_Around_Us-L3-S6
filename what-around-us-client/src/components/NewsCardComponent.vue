@@ -26,7 +26,7 @@
 
 <style>
     .card {
-        width: 18.5rem;
+        width: 100%;
     }
     .card a{
         text-decoration: none;

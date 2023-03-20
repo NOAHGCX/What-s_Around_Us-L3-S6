@@ -37,8 +37,8 @@
     <div class="container-fluid all">
       <h1>News</h1>
       <div class="container">
-        <vueper-slides class="no-shadow" :bullets="false" slide-multiple fixed-height="58vh" :visible-slides="3"
-          :gap="3" :dragging-distance="200" :breakpoints="{ 800: { visibleSlides: 2, slideMultiple: 2 } }">
+        <vueper-slides class="no-shadow" :bullets="false" slide-multiple fixed-height="58vh" :visible-slides="3" :gap="3"
+         :dragging-distance="20" :breakpoints="{ 1000: { visibleSlides: 2, slideMultiple: 2 }, 770: { visibleSlides: 1, slideMultiple: 1 } }">
           <vueper-slide v-for="(slide, i) in NewsResult" :key="i">
             <template #content>
               <NewsCardComponent :newsLink="slide.url" :newsImage="slide.urlToImage" :newsTitle="slide.title"
