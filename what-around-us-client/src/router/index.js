@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue'
+import ConnectionView from '../views/ConnectionView.vue'
 
 const routes = [
   {
@@ -20,6 +21,15 @@ const routes = [
       leaveClass: 'animate__animated animate__slideOutUp'
     },
     component: AboutView
+  },
+  {
+    path: '/connection',
+    name: 'connection',
+    meta: {
+      enterClass: 'none',
+      leaveClass: 'none'
+    },
+    component: ConnectionView
   }
 ]
 
