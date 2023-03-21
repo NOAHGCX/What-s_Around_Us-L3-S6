@@ -1,5 +1,9 @@
 <template>
     <div class="container-fluid connection">
+        <div class="position-absolute end-0">
+            <router-link to="/about">
+            <button class="btn btn-warning">Home</button></router-link>
+        </div>
         <div class="row">
             <div class="col-md-6 mx-auto">
                 <div class="card mt-5">

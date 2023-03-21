@@ -1,6 +1,10 @@
 <template>
   <div class="about">
     <header class="container-fluid p-4">
+      <div class="position-absolute end-0">
+        <router-link to="/connection">
+        <button class="btn btn-warning">Login</button></router-link>
+      </div>
       <div class="flex-column row">
         <div class="container col-5 logo">
           <div class="col p-3">
@@ -19,23 +23,20 @@
         <div class="col">
           <ul class="nav justify-content-around">
             <li class="nav-item">
-              <a class="nav-link active text-dark" href="#">Active</a>
+              <a class="nav-link text-dark" href="#News">News</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-dark" href="#">Link</a>
+              <a class="nav-link text-dark" href="#">Map</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-dark" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled text-dark">Disabled</a>
+              <a class="nav-link text-dark" href="#">Comment</a>
             </li>
           </ul>
         </div>
       </div>
     </header>
-    <div class="container-fluid all">
-      <h1>News</h1>
+    <div class="container-fluid all" id="News">
+      <h1>{{ city }}'s News</h1>
       <div class="container">
         <vueper-slides class="no-shadow" :bullets="false" slide-multiple fixed-height="58vh" :visible-slides="3" :gap="3"
          :dragging-distance="20" :breakpoints="{ 1000: { visibleSlides: 2, slideMultiple: 2 }, 770: { visibleSlides: 1, slideMultiple: 1 } }">

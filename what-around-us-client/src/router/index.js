@@ -7,28 +7,16 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    meta: {
-      enterClass: 'none',
-      leaveClass: 'none'
-    },
     component: HomeView
   },
   {
     path: '/about',
     name: 'about',
-    meta: {
-      enterClass: 'none',
-      leaveClass: 'animate__animated animate__slideOutUp'
-    },
     component: AboutView
   },
   {
     path: '/connection',
     name: 'connection',
-    meta: {
-      enterClass: 'none',
-      leaveClass: 'none'
-    },
     component: ConnectionView
   }
 ]
