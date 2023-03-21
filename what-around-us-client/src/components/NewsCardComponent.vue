@@ -28,6 +28,9 @@
     .card {
         width: 100%;
     }
+    .card img {
+        max-height: 21vh;
+    }
     .card a{
         text-decoration: none;
         cursor: pointer;
