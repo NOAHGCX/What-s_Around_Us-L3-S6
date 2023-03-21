@@ -87,29 +87,7 @@
     data() {
       return {
         NewsResult: [],
-        city: "Paris",
-        newsList: [{
-            "id": 1,
-            "newsTitle": "News 1",
-            "newsImage": "logo.png",
-            "newsLink": "google.com",
-            "newsText": "text news 1"
-          },
-          {
-            "id": 2,
-            "newsTitle": "News 2",
-            "newsImage": "logo.png",
-            "newsLink": "google.com",
-            "newsText": "text news 2"
-          },
-          {
-            "id": 3,
-            "newsTitle": "News 3",
-            "newsImage": "logo.png",
-            "newsLink": "google.com",
-            "newsText": "text news 3"
-          }
-        ]
+        city: "Montréal",
       }
     }
   }
@@ -117,7 +95,14 @@
 
 <style>
   .about .all {
-    background-color: grey;
+    background-color: rgb(67, 68, 69);
+  }
+
+  .about .all h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-top: 2rem;
+    color: white;
   }
 
   header {
