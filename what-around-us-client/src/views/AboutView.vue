@@ -3,7 +3,7 @@
     <header class="container-fluid p-4">
       <div class="position-absolute end-0">
         <router-link to="/connection">
-        <button class="btn btn-warning">Login</button></router-link>
+          <button class="btn btn-warning">Login</button></router-link>
       </div>
       <div class="flex-column row">
         <div class="container col-5 logo">
@@ -35,11 +35,12 @@
         </div>
       </div>
     </header>
-    <div class="container-fluid all" id="News">
+    <div class="container-fluid News" id="News">
       <h1>{{ city }}'s News</h1>
       <div class="container">
-        <vueper-slides class="no-shadow" :bullets="false" slide-multiple fixed-height="58vh" :visible-slides="3" :gap="3"
-         :dragging-distance="20" :breakpoints="{ 1000: { visibleSlides: 2, slideMultiple: 2 }, 770: { visibleSlides: 1, slideMultiple: 1 } }">
+        <vueper-slides class="no-shadow" :bullets="false" slide-multiple fixed-height="58vh" :visible-slides="3"
+          :gap="3" :dragging-distance="20"
+          :breakpoints="{ 1000: { visibleSlides: 2, slideMultiple: 2 }, 770: { visibleSlides: 1, slideMultiple: 1 } }">
           <vueper-slide v-for="(slide, i) in NewsResult" :key="i">
             <template #content>
               <NewsCardComponent :newsLink="slide.url" :newsImage="slide.urlToImage" :newsTitle="slide.title"
@@ -48,6 +49,10 @@
           </vueper-slide>
         </vueper-slides>
       </div>
+    </div>
+    <div class="container-fluid Map">
+      <h1>Map</h1>
+      <div v-for="(place,i) in PlaceResult" :key="i">{{ place.name }}</div>
     </div>
   </div>
 </template>
@@ -71,38 +76,118 @@
     },
     methods: {},
     mounted() {
-      const languageNav = navigator.language;
-      const languageCode = languageNav.split('-');
-      const language = languageCode[0];
+      //  news api 
       const axios = require('axios').default;
-      axios.get("https://newsapi.org/v2/everything?apiKey=974f46c4dbf74801aa8dd40217ed3ab9&language=" + language +
-          "&q=" + this.city).then(response => {
-          console.log(response.data.articles);
-          this.NewsResult = response.data.articles;
-        })
-        .catch(error => {
-          console.log(error);
-        });
+      const fetchNewsData = async () => {
+        const languageNav = navigator.language;
+        const languageCode = languageNav.split('-');
+        const language = languageCode[0];
+        axios.get("https://newsapi.org/v2/everything?apiKey=974f46c4dbf74801aa8dd40217ed3ab9&language=" + language +
+            "&q=" + this.city).then(response => {
+            console.log("News API");
+            console.log(response.data.articles);
+            this.NewsResult = response.data.articles;
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      }
+      //  foursquare api key fsq3PMGB3LBtRbutCglIfstDMGEB1vrb61fxd1yCJ7osAco=
+      const fetchPlaceData = async () => {
+        var lgt = 45.50884;
+        var ltt = -73.58781;
+        var query = "";
+        var type = "";
+
+        const params = {
+          method: "GET",
+          headers: {
+            accept: "application/json",
+            Authorization: "fsq3PMGB3LBtRbutCglIfstDMGEB1vrb61fxd1yCJ7osAco="
+          },
+        }
+        if (query == "" && type == "") {
+
+          axios.get("https://api.foursquare.com/v3/places/search?ll=" +
+              lgt +
+              "%2C" +
+              ltt +
+              "&radius=10000&limit=50",
+              params).then(response => {
+              console.log("Foursquare API");
+              console.log(response.data.results);
+              this.PlaceResult = response.data.results;
+            })
+            .catch(error => {
+              console.log(error);
+            });
+        } else if (query != "" && type == "") {
+          axios.get("https://api.foursquare.com/v3/places/search?ll=" +
+              lgt +
+              "%2C" +
+              ltt +
+              "&radius=10000&limit=50&query=" +
+              query,
+              params
+            ).then(response => {
+              console.log("Foursquare API");
+              console.log(response);
+              this.PlaceResult = response.data.results;
+            })
+            .catch(error => {
+              console.log(error);
+            });
+        } else if (query == "" && type != "") {
+          axios.get(
+              "https://api.foursquare.com/v3/places/search?ll=" +
+              lgt +
+              "%2C" +
+              ltt +
+              "&radius=10000&limit=50&categories=" +
+              type,
+              params
+            ).then(response => {
+              console.log("Foursquare API");
+              console.log(response);
+              this.PlaceResult = response.data.results;
+            })
+            .catch(error => {
+              console.log(error);
+            });
+        }
+      }
+
+      //  fetch data
+      const fetchData = async () => {
+        await fetchNewsData();
+        await fetchPlaceData();
+      }
+      fetchData();
     },
     data() {
       return {
         NewsResult: [],
         city: "Montréal",
+        PlaceResult: [],
       }
     }
   }
 </script>
 
 <style>
-  .about .all {
+  .about .News {
     background-color: rgb(67, 68, 69);
   }
 
-  .about .all h1 {
+  .about .News h1 {
     text-align: center;
     margin-bottom: 2rem;
     padding-top: 2rem;
     color: white;
+  }
+
+  .about .Map {
+    background-color: white;
   }
 
   header {
