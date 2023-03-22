@@ -52,7 +52,10 @@
     </div>
     <div class="container-fluid Map">
       <h1>Map</h1>
-      <div v-for="(place,i) in PlaceResult" :key="i">{{ place.name }}</div>
+      <label for="dog-names">Choose a dog name:</label>
+      <select name="dog-names" id="dog-names">
+        <option v-for="(place,i) in PlaceResult" :key="i" :value="i">{{ place.name }}</option>
+      </select>
     </div>
   </div>
 </template>
@@ -188,6 +191,7 @@
 
   .about .Map {
     background-color: white;
+    height: 50vh;
   }
 
   header {
