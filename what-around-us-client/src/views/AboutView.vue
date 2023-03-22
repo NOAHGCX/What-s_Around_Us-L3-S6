@@ -52,17 +52,13 @@
     </div>
     <div class="container-fluid Map">
       <h1>Map</h1>
-      <label for="place-names">Choose a Place :</label>
-      <select name="place-names" id="place-names">
-        <option v-for="(place,i) in PlaceResult" :key="i" :value="i">{{ place.name }}</option>
-      </select>
       <label class="dropdown">
         <div class="dd-button">
-          Choose a Place
+          {{ chosenPlace }}
         </div>
         <input type="checkbox" class="dd-input" name="place-names">
         <ul class="dd-menu">
-          <li v-for="(place,i) in PlaceResult" :key="i">{{ place.name }}</li>
+          <li v-for="(place,i) in PlaceResult" :key="i" @click="getPlace(place)">{{ place.name }}</li>
         </ul>
       </label>
     </div>
@@ -86,7 +82,13 @@
       VueperSlides,
       VueperSlide
     },
-    methods: {},
+    methods: {
+      getPlace: function (place) {
+        console.log("the chosen place is :")
+        console.log(place)
+        this.chosenPlace = place.name;
+      }
+    },
     mounted() {
       //  news api 
       const axios = require('axios').default;
@@ -181,6 +183,7 @@
         NewsResult: [],
         city: "Montréal",
         PlaceResult: [],
+        chosenPlace: "Choose a Place",
       }
     }
   }
