@@ -264,6 +264,8 @@
     box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.1);
     background-color: #ffffff;
     list-style-type: none;
+    max-height: 40vh;
+    overflow: auto;
   }
 
   .dd-input+.dd-menu {
