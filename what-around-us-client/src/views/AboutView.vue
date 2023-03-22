@@ -208,7 +208,7 @@
 
   .about .Map {
     background-color: white;
-    height: 50vh;
+    margin-bottom: 5vh;
   }
 
   header {

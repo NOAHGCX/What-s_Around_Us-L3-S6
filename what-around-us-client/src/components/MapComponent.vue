@@ -95,8 +95,9 @@
     @import 'leaflet/dist/leaflet.css';
 
     #leaflet-map {
-        height: 100vh;
-        width: 100%;
+        height: 60vh;
+        margin: auto;
         overflow: hidden;
+        z-index: 0;
     }
 </style>
