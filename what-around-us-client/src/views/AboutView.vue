@@ -52,10 +52,19 @@
     </div>
     <div class="container-fluid Map">
       <h1>Map</h1>
-      <label for="dog-names">Choose a dog name:</label>
-      <select name="dog-names" id="dog-names">
+      <label for="place-names">Choose a Place :</label>
+      <select name="place-names" id="place-names">
         <option v-for="(place,i) in PlaceResult" :key="i" :value="i">{{ place.name }}</option>
       </select>
+      <label class="dropdown">
+        <div class="dd-button">
+          Choose a Place
+        </div>
+        <input type="checkbox" class="dd-input" name="place-names">
+        <ul class="dd-menu">
+          <li v-for="(place,i) in PlaceResult" :key="i">{{ place.name }}</li>
+        </ul>
+      </label>
     </div>
   </div>
 </template>
@@ -201,5 +210,85 @@
 
   .logo {
     background-color: beige;
+  }
+
+  /* Dropdown */
+
+  .dropdown {
+    display: inline-block;
+    position: relative;
+  }
+
+  .dd-button {
+    display: inline-block;
+    border: 1px solid gray;
+    border-radius: 4px;
+    padding: 10px 30px 10px 20px;
+    background-color: #ffffff;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .dd-button:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid black;
+  }
+
+  .dd-button:hover {
+    background-color: #eeeeee;
+  }
+
+
+  .dd-input {
+    display: none;
+  }
+
+  .dd-menu {
+    position: absolute;
+    top: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 0;
+    margin: 2px 0 0 0;
+    box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    list-style-type: none;
+  }
+
+  .dd-input+.dd-menu {
+    display: none;
+  }
+
+  .dd-input:checked+.dd-menu {
+    display: block;
+  }
+
+  .dd-menu li {
+    padding: 10px 20px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .dd-menu li:hover {
+    background-color: #f6f6f6;
+  }
+
+  .dd-menu li a {
+    display: block;
+    margin: -10px -20px;
+    padding: 10px 20px;
+  }
+
+  .dd-menu li.divider {
+    padding: 0;
+    border-bottom: 1px solid #cccccc;
   }
 </style>
