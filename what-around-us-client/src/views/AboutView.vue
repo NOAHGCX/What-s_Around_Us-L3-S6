@@ -61,12 +61,14 @@
           <li v-for="(place,i) in PlaceResult" :key="i" @click="getPlace(place)">{{ place.name }}</li>
         </ul>
       </label>
+      <MapComponent :lgt="this.lgt" :ltt="this.ltt"/>
     </div>
   </div>
 </template>
 
 <script>
   import NewsCardComponent from '@/components/NewsCardComponent.vue';
+  import MapComponent from '@/components/MapComponent.vue';
 
   import {
     VueperSlides,
@@ -80,7 +82,8 @@
     components: {
       NewsCardComponent,
       VueperSlides,
-      VueperSlide
+      VueperSlide,
+      MapComponent
     },
     methods: {
       getPlace: function (place) {
@@ -108,8 +111,8 @@
       }
       //  foursquare api key fsq3PMGB3LBtRbutCglIfstDMGEB1vrb61fxd1yCJ7osAco=
       const fetchPlaceData = async () => {
-        var lgt = 45.50884;
-        var ltt = -73.58781;
+        var lgt = this.lgt;
+        var ltt = this.ltt;
         var query = "";
         var type = "";
 
@@ -182,6 +185,8 @@
       return {
         NewsResult: [],
         city: "Montréal",
+        ltt: -73.58781,
+        lgt: 45.50884,
         PlaceResult: [],
         chosenPlace: "Choose a Place",
       }
@@ -220,6 +225,7 @@
   .dropdown {
     display: inline-block;
     position: relative;
+    z-index: 10;
   }
 
   .dd-button {
