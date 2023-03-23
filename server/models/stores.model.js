@@ -15,6 +15,9 @@ module.exports = (sequelize, Sequelize) => {
         latitude: {
             type: Sequelize.FLOAT
         },
+        address: {
+            type: Sequelize.STRING
+        },
     }, { timestamps: true });
 
     return Stores;

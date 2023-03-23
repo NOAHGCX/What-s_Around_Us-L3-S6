@@ -8,7 +8,7 @@ const stores = require("../models/stores.model")(Sequelize.connection, Sequelize
 exports.create = (req, res) => {
     
         // Validate request
-        if (!req.body.name || !req.body.grade || !req.body.longitude || !req.body.latitude) {
+        if (!req.body.name || !req.body.grade || !req.body.longitude || !req.body.latitude || !req.body.idCity || !req.body.address) {
             res.status(400).send({
                 message: "Content can not be empty!"
             });
@@ -21,7 +21,8 @@ exports.create = (req, res) => {
             idCity: req.body.idCity,
             grade: req.body.grade,
             longitude: req.body.longitude,
-            latitude: req.body.latitude
+            latitude: req.body.latitude,
+            address: req.body.address
         };
     
         // Save in the database
@@ -62,6 +63,20 @@ exports.create = (req, res) => {
             .catch(err => {
                 res.status(500).send({
                     message: "Error retrieving record with id=" + id
+                });
+            });
+    }
+
+    // Get a record with a certain address and name
+    exports.search = (req, res) => {
+        console.log(req.body)
+        stores.findAll({ where: { [Op.and]: [{ name: req.body.name }, { address: req.body.address }] } })
+            .then(data => {
+                res.send(data);
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message: "Error retrieving record with name=" + req.body.name + " and address=" + req.body.address
                 });
             });
     }
