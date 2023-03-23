@@ -1,5 +1,6 @@
 const users = require("./controllers/user.controller.js");
 const sessions = require("./controllers/session.controller");
+const auth = require("./auth.js");
 
 exports.login = async (req, res) => {
     let user = await users.findByMail(req, res)
@@ -32,6 +33,8 @@ exports.login = async (req, res) => {
     }
 }
 
+
+
 exports.isLoggedIn = async (req, res) => {
     var token = req.get("Authorization")
     console.log(token)
@@ -52,4 +55,32 @@ exports.isLoggedIn = async (req, res) => {
     }
     console.log("no token!")
     return false
+}
+
+exports.signUp = async (req, res) => {
+    let loggedIn = await auth.isLoggedIn(req, res)
+    if (loggedIn) {
+        res.send(JSON.stringify({ isLoggedIn: true }))
+    } else {    
+        let user = await users.findByMail(req, res)
+        console.log(user)
+        // if the user exists 
+        if (user) {
+            res.status(401).send(JSON.stringify({ error: "User already exist" }))
+        } else {
+            userCreation = await users.create(req, res)
+            if (userCreation) {
+                let session = await sessions.createId(userCreation.id)
+                if (session) {
+                    token = session.token
+                    res.status(200).send(JSON.stringify({ message: "User created", token: token }))
+                }
+            } else {
+                res.status(500).send(JSON.stringify({ error: "User not created" }))
+            }
+        }
+
+    }
+
+
 }

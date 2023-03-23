@@ -6,7 +6,7 @@ const User = require("../models/user.model")(Sequelize.connection, Sequelize.lib
 
 // Create
 exports.create = (req, res) => {
-
+    var result = {};
     // Validate request
     if (!req.body.username || !req.body.password || !req.body.mail || !req.body.first_name || !req.body.last_name || !req.body.adress) {
         console.log(req.body)
@@ -29,16 +29,13 @@ exports.create = (req, res) => {
     // Save in the database
     User.create(obj)
         .then(data => {
-            res.send(data);
+            result = data
         })
         .catch(err => {
             console.log(res)
-            res.status(500).send({
-                message:
-                    err.message || "Some error occurred while creating the record."
-            });
+            result =  err.message || "Some error occurred while creating the record."
         });
-
+    return result
 };
 
 // Get all records with a certain name (sent from the front-end)

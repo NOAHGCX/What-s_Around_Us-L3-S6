@@ -12,5 +12,6 @@ router.get("/check", async (req, res) => {
         res.send(JSON.stringify({ isLoggedIn: false }))
     }
 });
+router.post("/signup", auth.signUp);
 
 module.exports = router;
