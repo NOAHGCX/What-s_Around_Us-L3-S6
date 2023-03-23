@@ -54,12 +54,16 @@
       <h1>Map</h1>
       <MapComponent :lgt="this.lgt" :ltt="this.ltt"/>
     </div>
+    <div class="container-fluid Comment">
+      <CommentComponent />
+    </div>
   </div>
 </template>
 
 <script>
   import NewsCardComponent from '@/components/NewsCardComponent.vue';
   import MapComponent from '@/components/MapComponent.vue';
+  import CommentComponent from '@/components/CommentComponent.vue';
 
   import {
     VueperSlides,
@@ -74,7 +78,8 @@
       NewsCardComponent,
       VueperSlides,
       VueperSlide,
-      MapComponent
+      MapComponent,
+      CommentComponent
     },
     methods: {
     },
