@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 const cityComments = require("../controllers/cityComments.controller.js");
+const cityComment = require("../cityComments.js");
+
 
 // Create a new cityComments
 router.post('/create', (req, res) => {
@@ -24,6 +26,11 @@ router.put('/update/:id', (req, res) => {
 // Delete a cityComments with id
 router.delete('/delete/:id', (req, res) => {
     cityComments.delete(req, res)
+    })
+
+// Create a new cityComment
+router.post('/createComment', (req, res) => {
+    cityComment.newComments(req, res)
     })
 
 module.exports = router;
