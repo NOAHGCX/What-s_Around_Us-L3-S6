@@ -18,12 +18,6 @@ module.exports = (sequelize, Sequelize) => {
         grade: {
             type: Sequelize.FLOAT
         },
-        created_at: {
-            type: Sequelize.DATE
-        },
-        updated_at: {  
-            type: Sequelize.DATE
-        },
     }, { timestamps: true });
 
     return storeComment;

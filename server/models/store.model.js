@@ -15,9 +15,6 @@ module.exports = (sequelize, Sequelize) => {
         latitude: {
             type: Sequelize.FLOAT
         },
-        created_at: {
-            type: Sequelize.DATE
-        },
     }, { timestamps: true });
 
     return Store;
