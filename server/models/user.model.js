@@ -18,12 +18,6 @@ module.exports = (sequelize, Sequelize) => {
         adress: {
             type: Sequelize.STRING
         },
-        created_at: {
-            type: Sequelize.DATE
-        },
-        updated_at: {
-            type: Sequelize.DATE
-        },
     }, { timestamps: true });
 
     return User;

@@ -15,7 +15,7 @@ module.exports = (sequelize, Sequelize) => {
         latitude: {
             type: Sequelize.FLOAT
         },
-    }, { timestamps: true });
+    }, { timestamps: false});
 
     return City;
 };
