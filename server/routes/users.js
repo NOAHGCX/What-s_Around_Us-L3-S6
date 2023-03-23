@@ -16,8 +16,12 @@ router.get("/:id", users.findByPk);
 
 
 // Update a User with id
-router.put('/update', (req, res) => {
+router.put('/update/:id', (req, res) => {
   users.update(req, res)
  })
 
+ // Delete a User with id
+  router.delete('/delete/:id', (req, res) => {
+    users.delete(req, res)
+  })
 module.exports = router;

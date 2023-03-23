@@ -92,7 +92,7 @@ exports.findByMail = async (req, res) => {
 //update a record with a certain id (sent from the front-end)
 exports.update = (req, res) => {
     console.log(req.body)
-    const id = req.body.id;
+    const id = req.params.id;
     
     User.update(req.body, {
         where: { id: id }
@@ -115,34 +115,27 @@ exports.update = (req, res) => {
         });
 };
 
+// Delete a record with a certain id (sent from the front-end)
+exports.delete = (req, res) => {
+    const id = req.params.id;
 
-exports.login = async (req, res) => {
-    let user = await users.findByEmail(req, res)
-    // if the user exists and password matches
-    console.log(user.id,user.password,req.password)
-    if (user && user.id && user.password == req.body.password) {
-
-        // search for a session for this user
-        let session = await sessions.findByUserId(user.id)
-
-        // if there is a session, check if it's expired
-        let isTokenExpired = session ? (new Date(session.validUntil) - new Date() <= 0) : true
-        var token = ""
-
-        // if the session exists and is not expired, continue
-        // else, create a session
-        if (session && !isTokenExpired) {
-            console.log("use existing")
-            token = session.token 
-        } else {
-            console.log("create new")
-            session = await sessions.create(user.id)
-            if (session) {
-                token = session.token
+    User.destroy({
+        where: { id: id }
+    })
+        .then(num => {
+            if (num == 1) {
+                res.send({
+                    message: "Record was deleted successfully!"
+                });
+            } else {
+                res.send({
+                    message: `Cannot delete record with id=${id}. Maybe record was not found!`
+                });
             }
-        }
-        res.send(JSON.stringify({ token: token }))
-    } else {
-        res.status(403).send("Access denied")
-    }
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "Could not delete record with id=" + id
+            });
+        });
 }
