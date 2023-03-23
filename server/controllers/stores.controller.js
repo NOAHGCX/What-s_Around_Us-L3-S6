@@ -8,7 +8,7 @@ const stores = require("../models/stores.model")(Sequelize.connection, Sequelize
 exports.create = (req, res) => {
     
         // Validate request
-        if (!req.body.name || !req.body.grade || !req.body.longitude || !req.body.latitude) {
+        if (!req.body.name || !req.body.grade || !req.body.longitude || !req.body.latitude || !req.body.idCity || !req.body.address) {
             res.status(400).send({
                 message: "Content can not be empty!"
             });
@@ -21,7 +21,8 @@ exports.create = (req, res) => {
             idCity: req.body.idCity,
             grade: req.body.grade,
             longitude: req.body.longitude,
-            latitude: req.body.latitude
+            latitude: req.body.latitude,
+            address: req.body.address
         };
     
         // Save in the database
