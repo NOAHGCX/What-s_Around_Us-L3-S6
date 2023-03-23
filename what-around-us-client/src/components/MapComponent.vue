@@ -44,6 +44,7 @@
         },
         methods: {
             getPlace: function (place) {
+                console.log("choosen place: " + place.geocodes.main.latitude+""+ place.geocodes.main.longitude);
                 this.chosenPlace = place.name;
                 this.mapInstance.panTo( [place.geocodes.main.latitude, place.geocodes.main.longitude]);
             },
