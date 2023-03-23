@@ -15,4 +15,9 @@ router.post('/create', (req, res) => {
 router.get("/:id", users.findByPk);
 
 
+// Update a User with id
+router.put('/update', (req, res) => {
+  users.update(req, res)
+ })
+
 module.exports = router;
