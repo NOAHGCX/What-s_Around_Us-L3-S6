@@ -7,4 +7,9 @@ router.post('/create/:id', (req, res) => {
     sessions.create(req, res)
 })
 
+// Retrieve a single Session with id
+router.get('/:id', (req, res) => {
+    sessions.findByUserId(req, res)
+})
+
 module.exports = router;

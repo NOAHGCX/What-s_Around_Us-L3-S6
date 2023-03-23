@@ -37,15 +37,21 @@ exports.create = async (req, res) => {
 };
 
 // Get session by user id
-exports.findByUserId = async (id) => {
+exports.findByUserId = async (req, res) => {
+    const id = req.params.id;
     var condition = id ? { userId: { [Op.eq]: id } } : null;
     var result = {};
     await Session.findOne({ where: condition })
     .then(data => {
         result = data
+        res.send(data)
     })
     .catch(e => {
         console.log("Error", e)
+        res.status(500).send({
+            message:
+                err.message || "Some error occurred while creating the record."
+        });
     })
     return result
 };
