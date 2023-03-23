@@ -10,4 +10,7 @@ router.post('/create', (req, res) => {
 // Retrieve all cities
 router.get("/", cities.findAll);
 
+// Retrieve a single cities with id
+router.get("/:id", cities.findByPk);
+
 module.exports = router;

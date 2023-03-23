@@ -51,3 +51,17 @@ exports.create = (req, res) => {
                 });
             });
     }
+
+    // Get a record with a certain id
+    exports.findByPk = (req, res) => {
+        const id = req.params.id;
+        cities.findByPk(id)
+            .then(data => {
+                res.send(data);
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message: "Error retrieving record with id=" + id
+                });
+            });
+    }
