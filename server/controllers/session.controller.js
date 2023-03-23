@@ -8,7 +8,8 @@ const Session = require("../models/session.model")(Sequelize.connection, Sequeli
 /* END db initialization */
 
 // Create session for user
-exports.create = async (id) => {
+exports.create = async (req, res) => {
+    const id = req.params.id;
 
     let validity = moment().add(25,"minutes").format("YYYY-MM-DD HH:mm:ss")
     const obj = {
@@ -23,9 +24,14 @@ exports.create = async (id) => {
     await Session.create(obj)
         .then(data => {
             result = data
+            res.send(data);
         })
         .catch(e => {
             console.log("error", e)
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while creating the record."
+            });
         });
     return result;
 };
