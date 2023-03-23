@@ -8,7 +8,7 @@ const stores = require("../models/stores.model")(Sequelize.connection, Sequelize
 exports.create = (req, res) => {
     
         // Validate request
-        if (!req.body.name || !req.body.country || !req.body.grade || !req.body.longitude || !req.body.latitude) {
+        if (!req.body.name || !req.body.grade || !req.body.longitude || !req.body.latitude) {
             res.status(400).send({
                 message: "Content can not be empty!"
             });
