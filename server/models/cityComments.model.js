@@ -1,6 +1,6 @@
 module.exports = (sequelize, Sequelize) => {
-    const cityComment = sequelize.define("cityComment", {
-       idUSer: {
+    const cityComments = sequelize.define("cityComments", {
+       idUser: {
             type: Sequelize.STRING
         },
         idCity: {
@@ -14,5 +14,5 @@ module.exports = (sequelize, Sequelize) => {
         }
     }, { timestamps: true });
 
-    return cityComment;
+    return cityComments;
 };

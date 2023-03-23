@@ -49,3 +49,95 @@ exports.findAll = (req, res) => {
             });
         });
 }
+
+// Get a record with a certain cityId
+exports.findByCityId = (req, res) => {
+    const id = req.params.id;
+    cityComments.findAll({
+        where: {
+            idCity: id
+        }
+    })
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while retrieving records."
+            });
+        });
+}
+
+// Get a record with a certain cityID and userID
+exports.findByCityIdAndUserId = (req, res) => {
+    console.log(req.params)
+    const idCity = req.params.cityId;
+    const idUser = req.params.userId;
+    cityComments.findAll({
+        where: {
+            idCity: idCity,
+            idUser: idUser
+        }
+    })
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while retrieving records."
+            });
+        });
+}
+
+// Update a record with a certain id
+exports.update = (req, res) => {
+    const id = req.params.id;
+
+    cityComments.update(req.body, {
+        where: { id: id }
+    })
+        .then(num => {
+            if (num == 1) {
+                res.send({
+                    message: "Record was updated successfully."
+                });
+            } else {
+                res.send({
+                    message: `Cannot update record with id=${id}. Maybe record was not found or req.body is empty!`
+                });
+            }
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "Error updating record with id=" + id
+            });
+        });
+}
+
+// Delete a record with a certain id
+exports.delete = (req, res) => {
+    const id = req.params.id;
+
+    cityComments.destroy({
+        where: { id: id }
+    })
+        .then(num => {
+            if (num == 1) {
+                res.send({
+                    message: "Record was deleted successfully!"
+                });
+            } else {
+                res.send({
+                    message: `Cannot delete record with id=${id}. Maybe record was not found!`
+                });
+            }
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "Could not delete record with id=" + id
+            });
+        });
+}
+

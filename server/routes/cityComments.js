@@ -10,4 +10,20 @@ router.post('/create', (req, res) => {
 // Retrieve all cityComments
 router.get("/", cityComments.findAll);
 
+// Retrieve  cityComments with cityId
+router.get("/:id", cityComments.findByCityId);
+
+// Retrieve cityComments with cityId and userId
+router.get("/:cityId/:userId", cityComments.findByCityIdAndUserId );
+
+// Update a cityComments with id
+router.put('/update/:id', (req, res) => {
+    cityComments.update(req, res)
+})
+
+// Delete a cityComments with id
+router.delete('/delete/:id', (req, res) => {
+    cityComments.delete(req, res)
+    })
+
 module.exports = router;
