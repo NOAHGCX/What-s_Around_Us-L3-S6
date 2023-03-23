@@ -17,4 +17,9 @@ router.get('/token/:id', (req, res) => {
     sessions.findByToken(req, res)
 })
 
+// Delete a Session with id
+router.delete('/delete/:id', (req, res) => {
+    sessions.delete(req, res)
+})
+
 module.exports = router;

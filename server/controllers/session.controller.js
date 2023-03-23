@@ -77,7 +77,8 @@ exports.findByToken = async (req, res) => {
 };
 
 // Delete a record with a certain id
-exports.delete = (id) => {
+exports.delete = async (req, res)  => {
+    const id = req.params.id;
     Session.destroy({
         where: { id: id }
     })
