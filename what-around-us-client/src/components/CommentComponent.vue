@@ -29,6 +29,8 @@
 <script>
   export default {
     name: "CommentComponent",
+    components: {
+    },
     beforeMount() {
       this.comment = [
         {
