@@ -52,15 +52,6 @@
     </div>
     <div class="container-fluid Map">
       <h1>Map</h1>
-      <label class="dropdown">
-        <div class="dd-button">
-          {{ chosenPlace }}
-        </div>
-        <input type="checkbox" class="dd-input" name="place-names">
-        <ul class="dd-menu">
-          <li v-for="(place,i) in PlaceResult" :key="i" @click="getPlace(place)">{{ place.name }}</li>
-        </ul>
-      </label>
       <MapComponent :lgt="this.lgt" :ltt="this.ltt"/>
     </div>
   </div>
@@ -86,14 +77,9 @@
       MapComponent
     },
     methods: {
-      getPlace: function (place) {
-        console.log("the chosen place is :")
-        console.log(place)
-        this.chosenPlace = place.name;
-      }
     },
     mounted() {
-      //  news api 
+      //  news api 6724ae4d57d24ef6b47776ef69e07a13 974f46c4dbf74801aa8dd40217ed3ab9
       const axios = require('axios').default;
       const fetchNewsData = async () => {
         const languageNav = navigator.language;
@@ -109,75 +95,9 @@
             console.log(error);
           });
       }
-      //  foursquare api key fsq3PMGB3LBtRbutCglIfstDMGEB1vrb61fxd1yCJ7osAco=
-      const fetchPlaceData = async () => {
-        var lgt = this.lgt;
-        var ltt = this.ltt;
-        var query = "";
-        var type = "";
-
-        const params = {
-          method: "GET",
-          headers: {
-            accept: "application/json",
-            Authorization: "fsq3PMGB3LBtRbutCglIfstDMGEB1vrb61fxd1yCJ7osAco="
-          },
-        }
-        if (query == "" && type == "") {
-
-          axios.get("https://api.foursquare.com/v3/places/search?ll=" +
-              lgt +
-              "%2C" +
-              ltt +
-              "&radius=10000&limit=50",
-              params).then(response => {
-              console.log("Foursquare API");
-              console.log(response.data.results);
-              this.PlaceResult = response.data.results;
-            })
-            .catch(error => {
-              console.log(error);
-            });
-        } else if (query != "" && type == "") {
-          axios.get("https://api.foursquare.com/v3/places/search?ll=" +
-              lgt +
-              "%2C" +
-              ltt +
-              "&radius=10000&limit=50&query=" +
-              query,
-              params
-            ).then(response => {
-              console.log("Foursquare API");
-              console.log(response);
-              this.PlaceResult = response.data.results;
-            })
-            .catch(error => {
-              console.log(error);
-            });
-        } else if (query == "" && type != "") {
-          axios.get(
-              "https://api.foursquare.com/v3/places/search?ll=" +
-              lgt +
-              "%2C" +
-              ltt +
-              "&radius=10000&limit=50&categories=" +
-              type,
-              params
-            ).then(response => {
-              console.log("Foursquare API");
-              console.log(response);
-              this.PlaceResult = response.data.results;
-            })
-            .catch(error => {
-              console.log(error);
-            });
-        }
-      }
-
       //  fetch data
       const fetchData = async () => {
         await fetchNewsData();
-        await fetchPlaceData();
       }
       fetchData();
     },
@@ -187,8 +107,6 @@
         city: "Montréal",
         ltt: -73.58781,
         lgt: 45.50884,
-        PlaceResult: [],
-        chosenPlace: "Choose a Place",
       }
     }
   }
@@ -218,88 +136,5 @@
 
   .logo {
     background-color: beige;
-  }
-
-  /* Dropdown */
-
-  .dropdown {
-    display: inline-block;
-    position: relative;
-    z-index: 10;
-  }
-
-  .dd-button {
-    display: inline-block;
-    border: 1px solid gray;
-    border-radius: 4px;
-    padding: 10px 30px 10px 20px;
-    background-color: #ffffff;
-    cursor: pointer;
-    white-space: nowrap;
-  }
-
-  .dd-button:after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    right: 15px;
-    transform: translateY(-50%);
-    width: 0;
-    height: 0;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-top: 5px solid black;
-  }
-
-  .dd-button:hover {
-    background-color: #eeeeee;
-  }
-
-
-  .dd-input {
-    display: none;
-  }
-
-  .dd-menu {
-    position: absolute;
-    top: 100%;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 0;
-    margin: 2px 0 0 0;
-    box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.1);
-    background-color: #ffffff;
-    list-style-type: none;
-    max-height: 40vh;
-    overflow: auto;
-  }
-
-  .dd-input+.dd-menu {
-    display: none;
-  }
-
-  .dd-input:checked+.dd-menu {
-    display: block;
-  }
-
-  .dd-menu li {
-    padding: 10px 20px;
-    cursor: pointer;
-    white-space: nowrap;
-  }
-
-  .dd-menu li:hover {
-    background-color: #f6f6f6;
-  }
-
-  .dd-menu li a {
-    display: block;
-    margin: -10px -20px;
-    padding: 10px 20px;
-  }
-
-  .dd-menu li.divider {
-    padding: 0;
-    border-bottom: 1px solid #cccccc;
   }
 </style>
