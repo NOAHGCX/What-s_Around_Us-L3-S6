@@ -13,4 +13,9 @@ router.get("/", cities.findAll);
 // Retrieve a single cities with id
 router.get("/:id", cities.findByPk);
 
+// Update a cities with id
+router.put('/update/:id', (req, res) => {
+    cities.update(req, res)
+})
+
 module.exports = router;

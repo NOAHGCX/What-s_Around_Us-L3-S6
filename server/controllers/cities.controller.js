@@ -65,3 +65,29 @@ exports.create = (req, res) => {
                 });
             });
     }
+
+    // Update a record with a certain id
+    exports.update = (req, res) => {
+        console.log(req.body)
+        const id = req.params.id;
+        
+        cities.update(req.body, {
+            where: { id: id }
+        })
+            .then(num => {
+                if (num == 1) {
+                    res.send({
+                        message: "Record was updated successfully."
+                    });
+                } else {
+                    res.send({
+                        message: `Cannot update record with id=${id}. Maybe record was not found or req.body is empty!`
+                    });
+                }
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message: "Error updating record with id=" + id
+                });
+            });
+    };
