@@ -12,4 +12,9 @@ router.get('/:id', (req, res) => {
     sessions.findByUserId(req, res)
 })
 
+// Retrieve a single Session with token
+router.get('/token/:id', (req, res) => {
+    sessions.findByToken(req, res)
+})
+
 module.exports = router;

@@ -57,15 +57,21 @@ exports.findByUserId = async (req, res) => {
 };
 
 // Get session by token 
-exports.findByToken = async (token) => {
+exports.findByToken = async (req, res) => {
+    const token = req.params.token;
     var condition = token ? { token: { [Op.eq]: token } } : null;
     var result = {};
     await Session.findOne({ where: condition })
     .then(data => {
         result = data
+        res.send(data)
     })
     .catch(e => {
         console.log("Error", e)
+        res.status(500).send({
+            message:
+                err.message || "Some error occurred while creating the record."
+        });
     })
     return result
 };
