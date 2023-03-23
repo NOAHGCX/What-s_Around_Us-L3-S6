@@ -23,4 +23,7 @@ router.delete('/delete/:id', (req, res) => {
     stores.delete(req, res)
   })
 
+// Retrieve stores with address and name
+router.post("/search", stores.search);
+
 module.exports = router;

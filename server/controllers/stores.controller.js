@@ -67,6 +67,20 @@ exports.create = (req, res) => {
             });
     }
 
+    // Get a record with a certain address and name
+    exports.search = (req, res) => {
+        console.log(req.body)
+        stores.findAll({ where: { [Op.and]: [{ name: req.body.name }, { address: req.body.address }] } })
+            .then(data => {
+                res.send(data);
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message: "Error retrieving record with name=" + req.body.name + " and address=" + req.body.address
+                });
+            });
+    }
+
     // Update a record with a certain id
     exports.update = (req, res) => {
         console.log(req.body)
