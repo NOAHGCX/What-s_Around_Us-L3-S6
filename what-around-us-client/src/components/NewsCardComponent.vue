@@ -7,7 +7,7 @@
         </div>
 
         <div class="card-body">
-            <p class="card-text">{{ newsText.substr(0, 100) }}...</p>
+            <p class="card-text">{{ newsText}}</p>
         </div>
     </div>
 </template>
@@ -26,7 +26,7 @@
 
 <style>
     .card {
-        width: 100%;
+        max-height: 55vh;
     }
     .card img {
         max-height: 21vh;
@@ -34,5 +34,9 @@
     .card a{
         text-decoration: none;
         cursor: pointer;
+    }
+
+    .card-body {
+        overflow: auto;
     }
 </style>
