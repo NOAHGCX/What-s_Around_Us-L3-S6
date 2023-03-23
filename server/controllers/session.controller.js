@@ -36,6 +36,29 @@ exports.create = async (req, res) => {
     return result;
 };
 
+// Create session for user with id in params
+exports.createId = async (id) => {
+
+    let validity = moment().add(25,"minutes").format("YYYY-MM-DD HH:mm:ss")
+    const obj = {
+        token: uuidv4(),
+        validUntil: validity,
+        userId: id
+    };
+    console.log(validity)
+
+    // Save in the database
+    var result = {};
+    await Session.create(obj)
+        .then(data => {
+            result = data
+        })
+        .catch(e => {
+            console.log("error", e)
+        });
+    return result;
+};
+
 // Get session by user id
 exports.findByUserId = async (req, res) => {
     const id = req.params.id;
@@ -44,14 +67,24 @@ exports.findByUserId = async (req, res) => {
     await Session.findOne({ where: condition })
     .then(data => {
         result = data
-        res.send(data)
     })
     .catch(e => {
         console.log("Error", e)
-        res.status(500).send({
-            message:
-                err.message || "Some error occurred while creating the record."
-        });
+        result = data
+    })
+    return result
+};
+
+// Get session by user id with id in params
+exports.findByUserIdParam = async (id) => {
+    var condition = id ? { userId: { [Op.eq]: id } } : null;
+    var result = {};
+    await Session.findOne({ where: condition })
+    .then(data => {
+        result = data
+    })
+    .catch(e => {
+        console.log("Error", e)
     })
     return result
 };

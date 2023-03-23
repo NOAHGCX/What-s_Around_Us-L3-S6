@@ -14,7 +14,6 @@ router.post('/create', (req, res) => {
 // Retrieve a single User with id
 router.get("/:id", users.findByPk);
 
-
 // Update a User with id
 router.put('/update/:id', (req, res) => {
   users.update(req, res)

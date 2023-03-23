@@ -77,17 +77,15 @@ exports.findByMail = async (req, res) => {
     var result = {};
     await User.findOne({ where: condition })
     .then(data => {
-        res.send(data);
         result = data
     })
     .catch(e => {
         console.log("Error", e)
-        res.status(500).send({
-            message: "Error retrieving record with id=" + id
-        });
+        result = data 
     })
     return result
 }
+
 
 //update a record with a certain id (sent from the front-end)
 exports.update = (req, res) => {

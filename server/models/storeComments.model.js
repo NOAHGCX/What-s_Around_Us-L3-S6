@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-    const storeComment = sequelize.define("storeComment", {
+    const storeComments = sequelize.define("storeComments", {
        idUSer: {
             type: Sequelize.STRING
         },
@@ -20,5 +20,5 @@ module.exports = (sequelize, Sequelize) => {
         },
     }, { timestamps: true });
 
-    return storeComment;
+    return storeComments;
 };
