@@ -6,9 +6,13 @@ const users = require("../controllers/user.controller.js");
 // Retrieve all Users
 router.get("/", users.findAll);
 
+// Create a new User
 router.post('/create', (req, res) => {
  users.create(req, res)
 })
+
+// Retrieve a single User with id
+router.get("/:id", users.findByPk);
 
 
 module.exports = router;
