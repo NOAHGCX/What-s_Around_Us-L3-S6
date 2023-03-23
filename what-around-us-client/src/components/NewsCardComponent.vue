@@ -7,7 +7,7 @@
         </div>
 
         <div class="card-body">
-            <p class="card-text">{{ newsText}}...</p>
+            <p class="card-text">{{ newsText}}</p>
         </div>
     </div>
 </template>
