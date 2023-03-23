@@ -18,4 +18,9 @@ router.put('/update/:id', (req, res) => {
     cities.update(req, res)
 })
 
+// Delete a cities with id
+router.delete('/delete/:id', (req, res) => {
+    cities.delete(req, res)
+  })
+
 module.exports = router;
