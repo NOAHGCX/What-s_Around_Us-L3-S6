@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-    const City = sequelize.define("city", {
+    const cities = sequelize.define("cities", {
         name: {
             type: Sequelize.STRING
         },
@@ -17,5 +17,5 @@ module.exports = (sequelize, Sequelize) => {
         },
     }, { timestamps: false});
 
-    return City;
+    return cities;
 };

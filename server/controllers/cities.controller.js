@@ -1,7 +1,7 @@
 /* BEGIN db initialization */
 const { Op } = require("sequelize");
 const Sequelize = require("../db.connection");
-const city = require("../models/city.model")(Sequelize.connection, Sequelize.library);
+const cities = require("../models/cities.model")(Sequelize.connection, Sequelize.library);
 /* END db initialization */
 
 // Create 
@@ -25,7 +25,7 @@ exports.create = (req, res) => {
         };
     
         // Save in the database
-        city.create(obj)
+        cities.create(obj)
             .then(data => {
                 res.send(data);
             })
@@ -36,4 +36,18 @@ exports.create = (req, res) => {
                 });
             });
     
+    }
+
+    // Get all records
+    exports.findAll = (req, res) => {
+        cities.findAll()
+            .then(data => {
+                res.send(data);
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message:
+                        err.message || "Some error occurred while retrieving records."
+                });
+            });
     }
