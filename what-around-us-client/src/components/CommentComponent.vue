@@ -70,14 +70,8 @@
             component.isLoggedIn = false
           })
       },
-<<<<<<< HEAD
       loadComment(){
         var component = this
-=======
-    },
-    beforeMount() {
-      var component = this
->>>>>>> 5d67e85bb32e607b0d5834c246baf344fc2c1a68
                 let options = {
                     method: "GET",
                     headers: {
@@ -96,13 +90,10 @@
                         console.log(error)
                         component.isLoggedIn = false
                     })
-<<<<<<< HEAD
       }
     },
     beforeMount() {
       this.loadComment()
-=======
->>>>>>> 5d67e85bb32e607b0d5834c246baf344fc2c1a68
     },
     data() {
       return {
@@ -110,7 +101,7 @@
         comment: "",
         rating: 0,
       };
-    },
+    }
   }
 </script>
 

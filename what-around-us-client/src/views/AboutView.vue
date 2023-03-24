@@ -2,15 +2,12 @@
   <div class="about">
     <header class="container-fluid p-4">
       <div class="position-absolute end-0">
-        <router-link to="/connection">
-          <button class="btn btn-warning">Login</button></router-link>
-      </div>
-      <div class="position-absolute end-0">
         <router-link to="/profil">
           <button class="btn btn-warning">Profil</button></router-link>
           <router-link to="/connection">
           <button class="btn btn-warning">LogIn</button></router-link>
       </div>
+      <AutoCompleteComponent />
       <div class="flex-column row">
         <div class="container col-5 logo">
           <div class="col p-3">
@@ -70,6 +67,7 @@
   import NewsCardComponent from '@/components/NewsCardComponent.vue';
   import MapComponent from '@/components/MapComponent.vue';
   import CommentComponent from '@/components/CommentComponent.vue';
+  import AutoCompleteComponent from '@/components/AutoComplete.vue';
 
   import {
     VueperSlides,
@@ -85,7 +83,8 @@
       VueperSlides,
       VueperSlide,
       MapComponent,
-      CommentComponent
+      CommentComponent,
+      AutoCompleteComponent
     },
     methods: {
     },
