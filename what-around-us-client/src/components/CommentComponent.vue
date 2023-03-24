@@ -195,12 +195,9 @@
     padding: 20px 30px;
     border-radius: 10px;
     border-bottom: 1px solid #ccc;
-    margin-top: 20px;
-    position: relative;
-    padding: 10px 20px;
     background: #efefef;
     border-radius: 10px;
-    margin-bottom: 15px;
+    margin: 15px auto;
   }
 
   .comments h2 {
