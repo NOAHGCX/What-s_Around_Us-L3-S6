@@ -69,9 +69,8 @@
                     .then((data) => {
                         component.isLoggedIn = true
                         component.token = data.token
-                        //switch to home page
-                        document.location.href = "http://localhost:8080/#/about";
                         localStorage.setItem('token', component.token);
+                        window.location.reload();
                     })
                     .catch((error) => {
                         console.log(error)

@@ -1,11 +1,31 @@
 <template>
     <div class="position-absolute end-0">
         <router-link to="/about">
-        <button class="btn btn-warning">Home</button></router-link>
+            <button class="btn btn-warning">Home</button></router-link>
     </div>
     <div>
-        <SignUpComponent v-if="create"/>
-        <LoginComponent v-else/>
+        <div v-if="isLoggedIn">
+            <div class="container-fluid connection">
+                <div class="row">
+                    <div class="col-md-6 mx-auto">
+                        <div class="card mt-5 Login">
+                            <div class="card-header">
+                                <h3 class="text-center">You are loged</h3>
+                            </div>
+                            <div class="card-body text-center">
+                                <router-link to="/profil">
+                                    <button class="btn btn-warning ">Profil</button>
+                                </router-link>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div v-else>
+            <SignUpComponent v-if="create" />
+            <LoginComponent v-else />
+        </div>
     </div>
     <div class="position-absolute sticky-top">
         <button class="btn btn-primary btn-block" @click="this.create=true">SignUp</button>
@@ -27,8 +47,12 @@
         methods: {
             logOut() {
                 localStorage.removeItem('token');
-                console.log("logged out");
-                console.log(localStorage.getItem('token'));
+                this.isLoggedIn = false;
+            }
+        },
+        beforeMount() {
+            if (localStorage.getItem('token')) {
+                this.isLoggedIn = true;
             }
         },
         data() {
@@ -38,6 +62,7 @@
                 name: "",
                 terms: false,
                 create: false,
+                isLoggedIn: false,
             };
         },
     };

@@ -6,10 +6,9 @@
           <button class="btn btn-warning">Login</button></router-link>
       </div>
       <div class="position-absolute end-0">
-        <router-link to="/profil">
-          <button class="btn btn-warning">Profil</button></router-link>
-          <router-link to="/connection">
-          <button class="btn btn-warning">LogIn/Out</button></router-link>
+        <router-link to="/connection">
+          <button class="btn btn-warning">LogIn/Out</button>
+        </router-link>
       </div>
       <div class="flex-column row">
         <div class="container col-5 logo">
