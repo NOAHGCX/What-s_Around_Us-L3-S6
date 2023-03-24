@@ -11,7 +11,7 @@ const Session = require("../models/session.model")(Sequelize.connection, Sequeli
 exports.create = async (req, res) => {
     const id = req.params.id;
 
-    let validity = moment().add(25,"minutes").format("YYYY-MM-DD HH:mm:ss")
+    let validity = moment().add(60,"minutes").format("YYYY-MM-DD HH:mm:ss")
     const obj = {
         token: uuidv4(),
         validUntil: validity,
@@ -39,7 +39,7 @@ exports.create = async (req, res) => {
 // Create session for user with id in params
 exports.createId = async (id) => {
 
-    let validity = moment().add(25,"minutes").format("YYYY-MM-DD HH:mm:ss")
+    let validity = moment().add(60,"minutes").format("YYYY-MM-DD HH:mm:ss")
     const obj = {
         token: uuidv4(),
         validUntil: validity,
