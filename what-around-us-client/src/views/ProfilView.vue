@@ -1,25 +1,48 @@
 <template>
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">{{ user.username }}</h5>
-        <p class="card-text">{{ user.first_name }} {{ user.last_name }}</p>
-        <p class="card-text">{{ user.adress }}</p>
-        <ul>
-          <li v-for="comment in cityComments" :key="comment.id">
-            {{ comment.comment }} - {{ comment.grade }}
-          </li>
-        </ul>
-        <p v-if="storeComments.length === 0">No data</p>
-        <ul v-else>
-          <li v-for="comment in storeComments" :key="comment.id">
-            {{ comment }}
-          </li>
-        </ul>
+  <div class="container-fluid connection pt-5">
+    <div class="row">
+      <div class="col-md-6 mx-auto">
+        <div class="card cardUser">
+          <div class="card-body">
+            <h5 class="card-title">{{ user.username }}</h5>
+            <div class="d-flex flex-row">
+              <h6>First Name :</h6>
+              <p class="card-text ms-3">{{ user.first_name }}</p>
+            </div>
+            <div class="d-flex flex-row">
+              <h6>Last Name :</h6>
+              <p class="card-text ms-3">{{ user.last_name }}</p>
+            </div>
+            <div class="d-flex flex-row">
+              <h6>Adress :</h6>
+              <p class="card-text ms-3">{{ user.adress }}</p>
+            </div>
+            <h6 v-if="cityComments.length === 1">No City Comment</h6>
+            <div v-else>
+              <h6>City Comment :</h6>
+              <ul>
+                <li v-for="comment in cityComments" :key="comment.id">
+                  {{ comment.comment }} - {{ comment.grade }}
+                </li>
+              </ul>
+            </div>
+            <h6 v-if="storeComments.length === 1">No Store Comment</h6>
+            <div v-else>
+              <h6>Store Comment :</h6>
+              <ul>
+                <li v-for="comment in storeComments" :key="comment.id">
+                  {{ comment.comment }} - {{ comment.grade }}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </template>
-  
-  <script>
+  </div>
+</template>
+
+<script>
   export default {
     data() {
       return {
@@ -34,29 +57,51 @@
       };
     },
     beforeMount() {
-                var component = this
-                let options = {
-                    method: "GET",
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization':  localStorage.getItem('token')
-                    }
-                }
-                fetch('/api/profil', options)
-                    .then((response) => {
-                        console.log(response)
-                        return response.json()
-                    })
-                    .then((data) => {
-                       console.log(data)
-                        component.user = data.user
-                        component.cityComments = data.cityComments
-                        component.storeComments = data.storeComments
-                    })
-                    .catch((error) => {
-                        console.log(error)
-                        component.isLoggedIn = false
-                    })
+      var component = this
+      let options = {
+        method: "GET",
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': localStorage.getItem('token')
+        }
+      }
+      fetch('/api/profil', options)
+        .then((response) => {
+          console.log(response)
+          return response.json()
+        })
+        .then((data) => {
+          console.log(data)
+          component.user = data.user
+          component.cityComments = data.cityComments
+          component.storeComments = data.storeComments
+        })
+        .catch((error) => {
+          console.log(error)
+          component.isLoggedIn = false
+        })
     },
   };
-  </script>
+</script>
+
+<style>
+  .cardUser {
+    word-wrap: break-word;
+  }
+
+  .cardUser .card-body {
+    height: 80vh;
+  }
+
+  @keyframes slide-up {
+    0% {
+      transform: translateY(50px);
+      opacity: 0;
+    }
+
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+</style>
