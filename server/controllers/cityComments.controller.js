@@ -6,8 +6,13 @@ const cityComments = require("../models/cityComments.model")(Sequelize.connectio
 
 // Create
 exports.create = (req, res, idUser) => {
+    console.log("idCity" + req.body.idCity)
+    console.log("idUser" + idUser)
+    console.log("comment" + req.body.comment)
+    console.log("grade" + req.body.grade)
     // Validate request
-    if (!req.body.idCity || !idUser || !req.body.comment || !req.body.grade) {
+    if (!req.body.idCity || !idUser || !req.body.comment ) {
+        console.log("je suis dans le if")
         res.status(400).send({
             message: "Content can not be empty!"
         });
@@ -22,18 +27,16 @@ exports.create = (req, res, idUser) => {
         grade: req.body.grade
     };
 
+    result = {}
     // Save in the database
     cityComments.create(obj)
         .then(data => {
-            res.send(data);
+            result = data
         })
         .catch(err => {
-            res.status(500).send({
-                message:
-                    err.message || "Some error occurred while creating the record."
-            });
+           result = err.message || "Some error occurred while creating the record."
         });
-
+        return result
 }
 
 // Get all records
