@@ -45,7 +45,6 @@ exports.createId = async (id) => {
         validUntil: validity,
         userId: id
     };
-    console.log(validity)
 
     // Save in the database
     var result = {};
@@ -53,8 +52,8 @@ exports.createId = async (id) => {
         .then(data => {
             result = data
         })
-        .catch(e => {
-            console.log("error", e)
+        .catch(err => {
+            result =  err.message || "Some error occurred while creating the record."
         });
     return result;
 };
