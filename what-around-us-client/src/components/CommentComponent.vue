@@ -8,6 +8,9 @@
             <input name="username" type="text" placeholder="Name" onChange={this.handleChange} required />
           </li>
           <li>
+            <vue3-star-ratings class="m-2 p-0 d-flex align-items-start" v-model="rating" @click="handleChange() " :starSize="'20'" :showControl="false"/>
+          </li>
+          <li>
             <textarea name="comment" placeholder="Comment" onChange={this.handleChange} required></textarea>
           </li>
           <li>
@@ -19,6 +22,7 @@
     <div className="comments-list">
       <div v-for="(message,i) in comment" :key="i" className="comment">
         <h4>{{message.idUser}}</h4>
+        <vue3-star-ratings class="m-2 p-0 d-flex align-items-start" v-model="message.grade" :starSize="'20'" :showControl="false" :disableClick="true"/>
         <p class="timestamp">{{message.date}}</p>
         <p>{{message.comment}}</p>
       </div>
@@ -27,9 +31,17 @@
 </template>
 
 <script>
+  import vue3StarRatings from "vue3-star-ratings";
+
   export default {
     name: "CommentComponent",
     components: {
+      vue3StarRatings,
+    },
+    methods: {
+      handleChange() {
+        console.log(this.rating);
+      },
     },
     beforeMount() {
       this.comment = [
@@ -59,6 +71,7 @@
     data() {
       return {
         comment: [],
+        rating: 0,
       };
     },
   }

@@ -1,72 +1,35 @@
 <template>
-    <div class="container-fluid connection">
-        <div class="position-absolute end-0">
-            <router-link to="/about">
-            <button class="btn btn-warning">Home</button></router-link>
-        </div>
-        <div class="row">
-            <div class="col-md-6 mx-auto">
-                <div class="card mt-5">
-                    <div class="card-header">
-                        <h3 class="text-center">Login</h3>
-                    </div>
-                    <div class="card-body">
-                        <form>
-                            <div class="form-group">
-                                <label for="email">Email address</label>
-                                <input type="email" class="form-control" id="email" v-model="email">
-                            </div>
-                            <div class="form-group">
-                                <label for="password">Password</label>
-                                <input type="password" class="form-control" id="password" v-model="password">
-                            </div>
-                            <button type="submit" class="btn btn-primary btn-block">Login</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6 mx-auto">
-                <div class="card mt-5">
-                    <div class="card-header">
-                        <h3 class="text-center">Create Account</h3>
-                    </div>
-                    <div class="card-body">
-                        <form>
-                            <div class="form-group">
-                                <label for="name">Name</label>
-                                <input type="text" class="form-control" id="name" v-model="name">
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email address</label>
-                                <input type="email" class="form-control" id="email" v-model="email">
-                            </div>
-                            <div class="form-group">
-                                <label for="password">Password</label>
-                                <input type="password" class="form-control" id="password" v-model="password">
-                            </div>
-                            <div class="form-group form-check">
-                                <input type="checkbox" class="form-check-input" id="terms" v-model="terms">
-                                <label class="form-check-label" for="terms">I agree to the terms and conditions</label>
-                            </div>
-                            <button type="submit" class="btn btn-primary btn-block">Create Account</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="position-absolute end-0">
+        <router-link to="/about">
+        <button class="btn btn-warning">Home</button></router-link>
+    </div>
+    <div>
+        <SignUpComponent v-if="create"/>
+        <LoginComponent v-else/>
+    </div>
+    <div class="position-absolute sticky-top">
+        <button class="btn btn-primary btn-block" @click="this.create=true">SignUp</button>
+        <button class="btn btn-primary btn-block" @click="this.create=false">Login</button>
     </div>
 </template>
 
 <script>
+    import SignUpComponent from '@/components/SignUpComponent.vue';
+    import LoginComponent from '@/components/LoginComponent.vue';
+
     export default {
+        name: "ConnectionView",
+        components: {
+            SignUpComponent,
+            LoginComponent,
+        },
         data() {
             return {
                 email: "",
                 password: "",
                 name: "",
                 terms: false,
+                create: false,
             };
         },
     };
