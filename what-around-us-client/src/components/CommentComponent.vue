@@ -63,15 +63,16 @@
           })
           .then((data) => {
             console.log(data);
+            if(data.error=="No session"){
+              alert("If you are not logged in, you can't make the comments.")
+            }
             this.loadComment();
           })
           .catch((error) => {
-            console.log(error)
-            component.isLoggedIn = false
+            console.log(error);
           })
       },
       loadComment(){
-        var component = this
                 let options = {
                     method: "GET",
                     headers: {
@@ -88,7 +89,6 @@
                     })
                     .catch((error) => {
                         console.log(error)
-                        component.isLoggedIn = false
                     })
       }
     },
