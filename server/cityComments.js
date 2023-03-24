@@ -13,6 +13,7 @@ exports.newComments = async (req, res) => {
             let isTokenExpired = (new Date(session.validUntil) - new Date()) <= 0
             if (session && !isTokenExpired) {
                 cityComments.create(req, res, idUser)
+                res.status(200).send(JSON.stringify({ message: "Comment created" }))
                 return true
             }
             else{
