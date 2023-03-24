@@ -5,25 +5,30 @@
       <form onSubmit="">
         <ul>
           <li>
-            <input name="username" type="text" placeholder="Name" onChange={this.handleChange} required />
+            <vue3-star-ratings class="m-2 p-0 d-flex align-items-start" v-model="rating" @click="handleChange() "
+              :starSize="'20'" :showControl="false" />
           </li>
           <li>
-            <vue3-star-ratings class="m-2 p-0 d-flex align-items-start" v-model="rating" @click="handleChange() " :starSize="'20'" :showControl="false"/>
+            <input type="text" placeholder="Comment" v-model="comment"
+              required/>
           </li>
           <li>
-            <textarea name="comment" placeholder="Comment" onChange={this.handleChange} required></textarea>
-          </li>
-          <li>
-            <input type="submit" value="Post" />
+            <input type="submit" value="Post" @click="postComment()" />
           </li>
         </ul>
       </form>
     </div>
     <div className="comments-list">
-      <div v-for="(message,i) in comment" :key="i" className="comment">
+      <div v-for="(message,i) in allComment" :key="i" className="comment">
         <h4>{{message.idUser}}</h4>
+<<<<<<< HEAD
         <vue3-star-ratings class="m-2 p-0 d-flex align-items-start" v-model="message.grade" :starSize="'20'" :showControl="false" :disableClick="true"/>
         <p class="timestamp">{{message.updatedAt}}</p>
+=======
+        <vue3-star-ratings class="m-2 p-0 d-flex align-items-start" v-model="message.grade" :starSize="'20'"
+          :showControl="false" :disableClick="true" />
+        <p class="timestamp">{{message.date}}</p>
+>>>>>>> 3616f48bd47920bd0e44e6f6d80655a154174b14
         <p>{{message.comment}}</p>
       </div>
     </div>
@@ -42,8 +47,37 @@
       handleChange() {
         console.log(this.rating);
       },
+      postComment() {
+        var component = this
+        console.log(component.comment);
+        console.log(component.rating);
+        let options = {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem('token')
+          },
+          body: JSON.stringify({
+            idCity: 1,
+            comment: component.comment,
+            grade: component.rating,
+          })
+        }
+        fetch('/api/cityComments/createComment', options)
+          .then((response) => {
+            return response.json()
+          })
+          .then((data) => {
+            console.log(data);
+          })
+          .catch((error) => {
+            console.log(error)
+            component.isLoggedIn = false
+          })
+      },
     },
     beforeMount() {
+<<<<<<< HEAD
       var component = this
                 let options = {
                     method: "GET",
@@ -63,10 +97,35 @@
                         console.log(error)
                         component.isLoggedIn = false
                     })
+=======
+      this.allComment = [{
+          "idCity": 1,
+          "idUser": 123,
+          "comment": "C'est une belle ville avec beaucoup de culture",
+          "grade": 4.5,
+          "date": "03/22/23, 09:05 PM"
+        },
+        {
+          "idCity": 2,
+          "idUser": 456,
+          "comment": "J'ai adoré cette ville !",
+          "grade": 5,
+          "date": "03/22/23, 10:15 AM"
+        },
+        {
+          "idCity": 3,
+          "idUser": 789,
+          "comment": "C'était une ville intéressante à visiter",
+          "grade": 3.5,
+          "date": "03/22/23, 02:30 PM"
+        }
+      ];
+>>>>>>> 3616f48bd47920bd0e44e6f6d80655a154174b14
     },
     data() {
       return {
-        comment: [],
+        allComment: [],
+        comment: "",
         rating: 0,
       };
     },
