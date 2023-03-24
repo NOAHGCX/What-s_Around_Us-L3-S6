@@ -9,8 +9,8 @@
               :starSize="'20'" :showControl="false" />
           </li>
           <li>
-            <input type="text" placeholder="Comment" v-model="comment"
-              required/>
+            <textarea type="text" placeholder="Comment" v-model="comment"
+              required></textarea>
           </li>
           <li>
             <input type="submit" value="Post" @click="postComment()" />
