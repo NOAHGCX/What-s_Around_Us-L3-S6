@@ -2,10 +2,9 @@
   <div class="about">
     <header class="container-fluid p-4">
       <div class="position-absolute end-0">
-        <router-link to="/profil">
-          <button class="btn btn-warning">Profil</button></router-link>
-          <router-link to="/connection">
-          <button class="btn btn-warning">LogIn</button></router-link>
+        <router-link to="/connection">
+          <button class="btn btn-warning">LogIn/Out</button>
+        </router-link>
       </div>
       <AutoCompleteComponent />
       <div class="flex-column row">
