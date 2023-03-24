@@ -71,6 +71,7 @@
                         component.token = data.token
                         //switch to home page
                         document.location.href = "http://localhost:8080/#/about";
+                        localStorage.setItem('token', component.token);
                     })
                     .catch((error) => {
                         console.log(error)
@@ -86,6 +87,8 @@
                 First: "",
                 Last: "",
                 Address: "",
+                isLoggedIn: false,
+                token: ""
             };
         },
     };

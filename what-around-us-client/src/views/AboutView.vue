@@ -112,6 +112,7 @@
         city: "Montréal",
         ltt: -73.58781,
         lgt: 45.50884,
+        token: localStorage.getItem('token')
       }
     }
   }
