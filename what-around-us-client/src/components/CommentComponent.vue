@@ -52,7 +52,7 @@
             'Authorization': localStorage.getItem('token')
           },
           body: JSON.stringify({
-            idCity: 1,
+            idCity: 2,
             comment: component.comment,
             grade: component.rating,
           })
