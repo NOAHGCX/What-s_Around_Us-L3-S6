@@ -6,7 +6,6 @@
           <button class="btn btn-warning">LogIn/Out</button>
         </router-link>
       </div>
-      <AutoCompleteComponent />
       <div class="flex-column row">
         <div class="container col-5 logo">
           <div class="col p-3">
@@ -18,8 +17,9 @@
         </div>
         <div class="col-5 align-self-center m-3">
           <div class="input-group mb-3">
-            <input type="text" class="form-control rounded-pill" placeholder="Other City ?"
-              aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <vue-google-autocomplete ref="address" id="map" classname="form-control rounded-pill"
+              placeholder="Please type your City" v-on:placechanged="getAddressData" types="(cities)" fields="['address_components']">
+            </vue-google-autocomplete>
           </div>
         </div>
         <div class="col">
@@ -54,7 +54,7 @@
     </div>
     <div class="container-fluid Map">
       <h1>Map</h1>
-      <MapComponent :lgt="this.lgt" :ltt="this.ltt"/>
+      <MapComponent :lgt="this.lgt" :ltt="this.ltt" />
     </div>
     <div class="container-fluid Comment">
       <CommentComponent />
@@ -66,7 +66,7 @@
   import NewsCardComponent from '@/components/NewsCardComponent.vue';
   import MapComponent from '@/components/MapComponent.vue';
   import CommentComponent from '@/components/CommentComponent.vue';
-  import AutoCompleteComponent from '@/components/AutoComplete.vue';
+  import VueGoogleAutocomplete from "vue-google-autocomplete";
 
   import {
     VueperSlides,
@@ -83,11 +83,28 @@
       VueperSlide,
       MapComponent,
       CommentComponent,
-      AutoCompleteComponent
+      VueGoogleAutocomplete
     },
     methods: {
+      /**
+       * When the location found
+       * @param {Object} address_componentsData Address components
+       */
+      getAddressData: function (address_componentsData) {
+        console.log(address_componentsData);
+        this.city = address_componentsData.locality;
+        this.ltt = address_componentsData.latitude;
+        this.lgt = address_componentsData.longitude;
+        this.country = address_componentsData.country;
+        console.log("city: " + this.city);
+        console.log("ltt: " + this.ltt);
+        console.log("lgt: " + this.lgt);
+        console.log("country: " + this.country);
+        window.location.reload();
+      },
     },
     mounted() {
+      this.$refs.address.focus();
       //  news api 6724ae4d57d24ef6b47776ef69e07a13 974f46c4dbf74801aa8dd40217ed3ab9
       const axios = require('axios').default;
       const fetchNewsData = async () => {
@@ -116,7 +133,9 @@
         city: "Montréal",
         ltt: -73.58781,
         lgt: 45.50884,
-        token: localStorage.getItem('token')
+        country: 'Canada',
+        token: localStorage.getItem('token'),
+        address: '',
       }
     }
   }
