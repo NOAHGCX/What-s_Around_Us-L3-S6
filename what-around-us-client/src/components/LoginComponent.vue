@@ -50,6 +50,7 @@
                         component.token = data.token
                         //switch to home page
                         document.location.href = "http://localhost:8080/#/about";
+                        localStorage.setItem('token', component.token);
                     })
                     .catch((error) => {
                         console.log(error)
@@ -61,6 +62,8 @@
             return {
                 email: "",
                 password: "",
+                isLoggedIn: false,
+                token: ""
             };
         },
     };
