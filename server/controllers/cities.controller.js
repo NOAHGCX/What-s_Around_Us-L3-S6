@@ -5,8 +5,8 @@ const cities = require("../models/cities.model")(Sequelize.connection, Sequelize
 /* END db initialization */
 
 // Create 
-exports.create = (req, res) => {
-    
+exports.create = async  (req, res) => {
+    return new Promise((resolve, reject) => {
         // Validate request
         if (!req.body.name || !req.body.country || !req.body.grade || !req.body.longitude || !req.body.latitude) {
             res.status(400).send({
@@ -14,7 +14,8 @@ exports.create = (req, res) => {
             });
             return;
         }
-    
+        
+        resultat = {}
         // An object representing your data in the db
         const obj = {
             name: req.body.name,
@@ -27,15 +28,12 @@ exports.create = (req, res) => {
         // Save in the database
         cities.create(obj)
             .then(data => {
-                res.send(data);
+                resolve(data.dataValues)
             })
             .catch(err => {
-                res.status(500).send({
-                    message:
-                        err.message || "Some error occurred while creating the record."
-                });
+                reject(err.message || "Some error occurred while creating the record.") 
             });
-    
+    })
     }
 
     // Get all records
@@ -65,6 +63,32 @@ exports.create = (req, res) => {
                 });
             });
     }
+
+    // Get a record with a certain longitude and latitude
+    exports.findByLongitudeLatitude = async (req, res) => {
+        return new Promise((resolve, reject) => {
+        const longitude = req.body.longitude;
+        const latitude = req.body.latitude;
+        cities.findAll({
+            where: {
+                longitude: longitude,
+                latitude: latitude
+            }
+        })
+            .then(data => {
+                if (data.length == 0) {
+                    resolve(["No data"])
+                }
+                else{
+                    resolve(data)
+                }
+            })
+            .catch(err => {
+                reject(err)
+        });
+    }
+    )}
+
 
     // Update a record with a certain id
     exports.update = (req, res) => {
