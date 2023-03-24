@@ -21,14 +21,8 @@
     <div className="comments-list">
       <div v-for="(message,i) in allComment" :key="i" className="comment">
         <h4>{{message.idUser}}</h4>
-<<<<<<< HEAD
         <vue3-star-ratings class="m-2 p-0 d-flex align-items-start" v-model="message.grade" :starSize="'20'" :showControl="false" :disableClick="true"/>
         <p class="timestamp">{{message.updatedAt}}</p>
-=======
-        <vue3-star-ratings class="m-2 p-0 d-flex align-items-start" v-model="message.grade" :starSize="'20'"
-          :showControl="false" :disableClick="true" />
-        <p class="timestamp">{{message.date}}</p>
->>>>>>> 3616f48bd47920bd0e44e6f6d80655a154174b14
         <p>{{message.comment}}</p>
       </div>
     </div>
@@ -77,7 +71,6 @@
       },
     },
     beforeMount() {
-<<<<<<< HEAD
       var component = this
                 let options = {
                     method: "GET",
@@ -91,36 +84,12 @@
                     })
                     .then((data) => {
                        console.log(data)
-                       this.comment = data
+                       this.allComment = data
                     })
                     .catch((error) => {
                         console.log(error)
                         component.isLoggedIn = false
                     })
-=======
-      this.allComment = [{
-          "idCity": 1,
-          "idUser": 123,
-          "comment": "C'est une belle ville avec beaucoup de culture",
-          "grade": 4.5,
-          "date": "03/22/23, 09:05 PM"
-        },
-        {
-          "idCity": 2,
-          "idUser": 456,
-          "comment": "J'ai adoré cette ville !",
-          "grade": 5,
-          "date": "03/22/23, 10:15 AM"
-        },
-        {
-          "idCity": 3,
-          "idUser": 789,
-          "comment": "C'était une ville intéressante à visiter",
-          "grade": 3.5,
-          "date": "03/22/23, 02:30 PM"
-        }
-      ];
->>>>>>> 3616f48bd47920bd0e44e6f6d80655a154174b14
     },
     data() {
       return {
