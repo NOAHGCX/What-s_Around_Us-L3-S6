@@ -98,7 +98,7 @@ exports.findByToken = async (token) => {
     })
     .catch(e => {
         console.log("Error", e)
-        result = data
+        result = e
     })
     return result
 };
