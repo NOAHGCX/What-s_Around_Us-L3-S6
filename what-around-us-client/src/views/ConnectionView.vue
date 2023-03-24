@@ -10,6 +10,7 @@
     <div class="position-absolute sticky-top">
         <button class="btn btn-primary btn-block" @click="this.create=true">SignUp</button>
         <button class="btn btn-primary btn-block" @click="this.create=false">Login</button>
+        <button class="btn btn-primary btn-block" @click="logOut">LogOut</button>
     </div>
 </template>
 
@@ -22,6 +23,13 @@
         components: {
             SignUpComponent,
             LoginComponent,
+        },
+        methods: {
+            logOut() {
+                localStorage.removeItem('token');
+                console.log("logged out");
+                console.log(localStorage.getItem('token'));
+            }
         },
         data() {
             return {

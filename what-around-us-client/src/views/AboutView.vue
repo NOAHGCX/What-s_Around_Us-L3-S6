@@ -9,7 +9,7 @@
         <router-link to="/profil">
           <button class="btn btn-warning">Profil</button></router-link>
           <router-link to="/connection">
-          <button class="btn btn-warning">LogIn</button></router-link>
+          <button class="btn btn-warning">LogIn/Out</button></router-link>
       </div>
       <div class="flex-column row">
         <div class="container col-5 logo">
