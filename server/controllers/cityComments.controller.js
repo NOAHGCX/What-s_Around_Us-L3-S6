@@ -5,9 +5,9 @@ const cityComments = require("../models/cityComments.model")(Sequelize.connectio
 /* END db initialization */
 
 // Create
-exports.create = (req, res) => {
+exports.create = (req, res, idUser) => {
     // Validate request
-    if (!req.body.idCity || !req.body.idUser || !req.body.comment) {
+    if (!req.body.idCity || !idUser || !req.body.comment) {
         res.status(400).send({
             message: "Content can not be empty!"
         });
@@ -17,7 +17,7 @@ exports.create = (req, res) => {
     // An object representing your data in the db
     const obj = {
         idCity: req.body.idCity,
-        idUser: req.body.idUser,
+        idUser: idUser,
         comment: req.body.comment,
         grade: req.body.grade
     };

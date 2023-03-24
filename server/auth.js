@@ -37,7 +37,6 @@ exports.login = async (req, res) => {
 
 exports.isLoggedIn = async (req, res) => {
     var token = req.get("Authorization")
-    console.log(token)
     if (token) {
         let session = await sessions.findByToken(token)
         if (session) {
@@ -63,24 +62,28 @@ exports.signUp = async (req, res) => {
         res.send(JSON.stringify({ isLoggedIn: true }))
     } else {    
         let user = await users.findByMail(req, res)
-        console.log(user)
         // if the user exists 
         if (user) {
             res.status(401).send(JSON.stringify({ error: "User already exist" }))
         } else {
-            userCreation = await users.create(req, res)
-            if (userCreation) {
-                let session = await sessions.createId(userCreation.id)
-                if (session) {
-                    token = session.token
-                    res.status(200).send(JSON.stringify({ message: "User created", token: token }))
+            try {
+                const userCreation = await users.create(req, res)
+                console.log(userCreation)
+                if (userCreation) {
+                    const session = await sessions.createId(userCreation.id)
+                    if (session) {
+                        const token = session.token
+                        res.status(200).send(JSON.stringify({ message: "User created", token: token }))
+                    } else {
+                        res.status(500).send(JSON.stringify({ error: "Session not created" }))
+                    }
+                } else {
+                    res.status(500).send(JSON.stringify({ error: "User not created" }))
                 }
-            } else {
-                res.status(500).send(JSON.stringify({ error: "User not created" }))
+            } catch (error) {
+                res.status(500).send(JSON.stringify({ error: "Error creating user" }))
             }
         }
 
     }
-
-
 }
