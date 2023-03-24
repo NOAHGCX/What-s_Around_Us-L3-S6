@@ -73,7 +73,7 @@ exports.signUp = async (req, res) => {
                     const session = await sessions.createId(userCreation.id)
                     if (session) {
                         const token = session.token
-                        res.status(200).send(JSON.stringify({ message: "User created", token: token , user : userCreation }))
+                        res.status(200).send(JSON.stringify({ message: "User created", token: token }))
                     } else {
                         res.status(500).send(JSON.stringify({ error: "Session not created" }))
                     }
