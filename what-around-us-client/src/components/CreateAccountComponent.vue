@@ -9,8 +9,20 @@
                     <div class="card-body">
                         <form>
                             <div class="form-group">
-                                <label for="name">Name</label>
-                                <input type="text" class="form-control" id="name" v-model="name">
+                                <label for="Username">Username</label>
+                                <input type="text" class="form-control" id="Username" v-model="Username">
+                            </div>
+                            <div class="form-group">
+                                <label for="First">First name</label>
+                                <input type="text" class="form-control" id="First" v-model="First">
+                            </div>
+                            <div class="form-group">
+                                <label for="Last">Last name</label>
+                                <input type="text" class="form-control" id="Last" v-model="Last">
+                            </div>
+                            <div class="form-group">
+                                <label for="Address">Address</label>
+                                <input type="text" class="form-control" id="Address" v-model="Address">
                             </div>
                             <div class="form-group">
                                 <label for="email">Email address</label>
@@ -20,11 +32,8 @@
                                 <label for="password">Password</label>
                                 <input type="password" class="form-control" id="password" v-model="password">
                             </div>
-                            <div class="form-group form-check">
-                                <input type="checkbox" class="form-check-input" id="terms" v-model="terms">
-                                <label class="form-check-label" for="terms">I agree to the terms and conditions</label>
-                            </div>
-                            <button type="submit" class="btn btn-primary btn-block">Create Account</button>
+                            <button type="submit" class="btn btn-primary btn-block" @click="signup()">Create
+                                Account</button>
                         </form>
                     </div>
                 </div>
@@ -36,12 +45,47 @@
 <script>
     export default {
         name: "CreateAccountComponent",
+        methods: {
+            signup() {
+                var component = this
+                let options = {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        username: component.Username,
+                        password: component.password,
+                        mail: component.email,
+                        first_name: component.First,
+                        last_name: component.Last,
+                        adress: component.Address,
+                    })
+                }
+                fetch('/api/auth/signup', options)
+                    .then((response) => {
+                        return response.json()
+                    })
+                    .then((data) => {
+                        component.isLoggedIn = true
+                        component.token = data.token
+                        //switch to home page
+                        document.location.href = "http://localhost:8080/#/about";
+                    })
+                    .catch((error) => {
+                        console.log(error)
+                        component.isLoggedIn = false
+                    })
+            },
+        },
         data() {
             return {
                 email: "",
                 password: "",
-                name: "",
-                terms: false,
+                Username: "",
+                First: "",
+                Last: "",
+                Address: "",
             };
         },
     };

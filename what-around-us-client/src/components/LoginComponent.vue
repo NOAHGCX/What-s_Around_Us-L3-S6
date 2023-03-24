@@ -16,7 +16,7 @@
                                 <label for="password">Password</label>
                                 <input type="password" class="form-control" id="password" v-model="password">
                             </div>
-                            <button type="submit" class="btn btn-primary btn-block">Login</button>
+                            <button type="submit" class="btn btn-primary btn-block" @click="login()">Login</button>
                         </form>
                     </div>
                 </div>
@@ -28,12 +28,39 @@
 <script>
     export default {
         name: "LoginComponent",
+        methods: {
+            login() {
+                var component = this
+                let options = {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        mail: component.email,
+                        password: component.password,
+                    })
+                }
+                fetch('/api/auth', options)
+                    .then((response) => {
+                        return response.json()
+                    })
+                    .then((data) => {
+                        component.isLoggedIn = true
+                        component.token = data.token
+                        //switch to home page
+                        document.location.href = "http://localhost:8080/#/about";
+                    })
+                    .catch((error) => {
+                        console.log(error)
+                        component.isLoggedIn = false
+                    })
+            },
+        },
         data() {
             return {
                 email: "",
                 password: "",
-                name: "",
-                terms: false,
             };
         },
     };
