@@ -10,7 +10,7 @@
                     <div class="col-md-6 mx-auto">
                         <div class="card mt-5 Login">
                             <div class="card-header">
-                                <h3 class="text-center">You are loged</h3>
+                                <h3 class="text-center">You are logged</h3>
                             </div>
                             <div class="card-body text-center">
                                 <router-link to="/profil">

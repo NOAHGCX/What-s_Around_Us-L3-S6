@@ -178,6 +178,7 @@
   .comment h4,
   .comment p {
     margin: 10px;
+    word-wrap: break-word;
   }
 
   footer {
