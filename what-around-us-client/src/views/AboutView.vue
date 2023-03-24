@@ -86,6 +86,32 @@
       VueGoogleAutocomplete
     },
     methods: {
+      checkCity() {
+        let options = {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem('token')
+          },
+          body: JSON.stringify({
+            city: this.city,
+            country: this.country,
+            grade: 5,
+            latitude: this.ltt,
+            longitude: this.lgt
+          })
+        }
+        fetch('/api/cities/createCity', options)
+          .then((response) => {
+            return response.json()
+          })
+          .then((data) => {
+            console.log(data);
+          })
+          .catch((error) => {
+            console.log(error);
+          })
+      },
       /**
        * When the location found
        * @param {Object} address_componentsData Address components
@@ -100,7 +126,7 @@
         console.log("ltt: " + this.ltt);
         console.log("lgt: " + this.lgt);
         console.log("country: " + this.country);
-        window.location.reload();
+        this.checkCity();
       },
     },
     mounted() {
