@@ -21,12 +21,10 @@ exports.getProfil = async (req, res) => {
             if (session && !isTokenExpired) {
                 try {
                 cityCommentsData = await cityComments.findByUserId(idUser)
-                console.log("cityCommentsData", cityCommentsData)
                 storeCommentsData = await storeComments.findByUserId(idUser)
-                console.log("storeCommentsData", storeCommentsData)
                 userData = await users.findById(idUser)
-                console.log("userData", userData)
                 if( cityCommentsData && userData && storeCommentsData){
+                    console.log(JSON.stringify({user: userData, cityComments: cityCommentsData, storeComments: storeCommentsData}))
                     res.status(200).send(JSON.stringify({user: userData, cityComments: cityCommentsData, storeComments: storeCommentsData}))
                     return true
                 }
