@@ -44,7 +44,7 @@
 
 <script>
     export default {
-        name: "CreateAccountComponent",
+        name: "SignUpComponent",
         methods: {
             signup() {
                 var component = this

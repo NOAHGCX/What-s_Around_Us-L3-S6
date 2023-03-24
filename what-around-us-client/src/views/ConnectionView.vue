@@ -4,23 +4,23 @@
         <button class="btn btn-warning">Home</button></router-link>
     </div>
     <div>
-        <CreateAccountComponent v-if="create"/>
+        <SignUpComponent v-if="create"/>
         <LoginComponent v-else/>
     </div>
     <div class="position-absolute sticky-top">
-        <button class="btn btn-primary btn-block" @click="this.create=true">Create Account</button>
+        <button class="btn btn-primary btn-block" @click="this.create=true">SignUp</button>
         <button class="btn btn-primary btn-block" @click="this.create=false">Login</button>
     </div>
 </template>
 
 <script>
-    import CreateAccountComponent from '@/components/CreateAccountComponent.vue';
+    import SignUpComponent from '@/components/SignUpComponent.vue';
     import LoginComponent from '@/components/LoginComponent.vue';
 
     export default {
         name: "ConnectionView",
         components: {
-            CreateAccountComponent,
+            SignUpComponent,
             LoginComponent,
         },
         data() {
