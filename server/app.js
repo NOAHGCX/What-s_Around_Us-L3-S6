@@ -12,6 +12,7 @@ var storesRouter = require('./routes/stores');
 var cityCommentsRouter = require('./routes/cityComments');
 var storeCommentsRouter = require('./routes/storeComments');
 var authRouter = require('./routes/auth');
+var profilRouter = require('./routes/profil');
 var app = express();
 
 // view engine setup
@@ -32,6 +33,7 @@ app.use('/stores', storesRouter);
 app.use('/cityComments', cityCommentsRouter);
 app.use('/storeComments', storeCommentsRouter);
 app.use('/auth', authRouter);
+app.use('/profil', profilRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

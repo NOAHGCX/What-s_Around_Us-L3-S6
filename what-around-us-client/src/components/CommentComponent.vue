@@ -23,7 +23,7 @@
       <div v-for="(message,i) in comment" :key="i" className="comment">
         <h4>{{message.idUser}}</h4>
         <vue3-star-ratings class="m-2 p-0 d-flex align-items-start" v-model="message.grade" :starSize="'20'" :showControl="false" :disableClick="true"/>
-        <p class="timestamp">{{message.date}}</p>
+        <p class="timestamp">{{message.updatedAt}}</p>
         <p>{{message.comment}}</p>
       </div>
     </div>
@@ -44,29 +44,25 @@
       },
     },
     beforeMount() {
-      this.comment = [
-        {
-          "idCity": 1,
-          "idUser": 123,
-          "comment": "C'est une belle ville avec beaucoup de culture",
-          "grade": 4.5,
-          "date": "03/22/23, 09:05 PM"
-        },
-        {
-          "idCity": 2,
-          "idUser": 456,
-          "comment": "J'ai adoré cette ville !",
-          "grade": 5,
-          "date": "03/22/23, 10:15 AM"
-        },
-        {
-          "idCity": 3,
-          "idUser": 789,
-          "comment": "C'était une ville intéressante à visiter",
-          "grade": 3.5,
-          "date": "03/22/23, 02:30 PM"
-        }
-      ];
+      var component = this
+                let options = {
+                    method: "GET",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                }
+                fetch('/api/cityComments/2', options)
+                    .then((response) => {
+                        return response.json()
+                    })
+                    .then((data) => {
+                       console.log(data)
+                       this.comment = data
+                    })
+                    .catch((error) => {
+                        console.log(error)
+                        component.isLoggedIn = false
+                    })
     },
     data() {
       return {

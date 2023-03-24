@@ -4,6 +4,7 @@ const Sequelize = require("../db.connection");
 const User = require("../models/user.model")(Sequelize.connection, Sequelize.library);
 /* END db initialization */
 
+
 // Create
 exports.create = async (req, res) => {
     return new Promise((resolve, reject) => {
@@ -34,7 +35,7 @@ exports.create = async (req, res) => {
                 resolve(data.dataValues); // Renvoie les valeurs de l'utilisateur créé
             })
             .catch(err => {
-                reject("Some error occurred while creating the record."); // Renvoie une erreur
+                reject("Some error occurred while creating the record." + err.message); // Renvoie une erreur
             });
     });
 };
@@ -67,6 +68,21 @@ exports.findByPk = (req, res) => {
             });
         });
 }
+
+//Get a record with a certain id
+// Get a record with a certain id (sent from the front-end)
+exports.findById = async (userId) => {
+    return new Promise((resolve, reject) => {
+    const id = userId
+    User.findByPk(id)
+        .then(data => {
+            resolve(data.dataValues || ["No data"])
+        })
+        .catch(err => {
+            reject(err.message)
+        });
+}
+)}
 
 //Get a record with a certain mail (sent from the front-end)
 exports.findByMail = async (req, res) => {

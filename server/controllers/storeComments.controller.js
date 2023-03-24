@@ -70,6 +70,29 @@ exports.findByStoreId = (req, res) => {
         });
 }
 
+// Get records with a certain userID
+exports.findByUserId = async (userId) => {
+    return new Promise((resolve, reject) => {
+        const id = userId
+        storeComments.findAll({
+            where: {
+                idUser: id
+            }
+        })
+            .then(data => {
+                if (data.length == 0) {
+                    resolve(["No data"])
+                }
+                else{
+                    resolve(data)
+                }
+            })
+            .catch(err => {
+                reject(err.message)
+            });
+    } 
+    )}
+
 // Get a record with a certain cityID and userID
 exports.findByStoreIdAndUserId = (req, res) => {
     console.log(req.params)

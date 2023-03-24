@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const users = require("../controllers/user.controller.js");
+const profil= require("../profil.js");
 
 /* GET users listing. */
 // Retrieve all Users
@@ -23,4 +24,7 @@ router.put('/update/:id', (req, res) => {
   router.delete('/delete/:id', (req, res) => {
     users.delete(req, res)
   })
+
+  //get all info for a user
+  router.get("/profil", profil.getProfil);
 module.exports = router;
