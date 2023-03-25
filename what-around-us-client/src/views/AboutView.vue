@@ -166,8 +166,8 @@
       return {
         NewsResult: [],
         city: localStorage.getItem('city') || "Montreal",
-        ltt: Number(localStorage.getItem('ltt')) || -73.58781,
-        lgt: Number(localStorage.getItem('lgt')) || 45.50884, 
+        ltt: Number(localStorage.getItem('ltt')) || 45.50884,
+        lgt: Number(localStorage.getItem('lgt')) || -73.58781, 
         country: localStorage.getItem('country') || "Canada",
         token: localStorage.getItem('token'),
         address: '',

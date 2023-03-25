@@ -46,10 +46,14 @@
                         return response.json()
                     })
                     .then((data) => {
-                        component.isLoggedIn = true
-                        component.token = data.token
-                        localStorage.setItem('token', component.token);
-                        window.location.reload();
+                        if (data.error == "Invalid credentials") {
+                            alert("User doesn't exist or wrong password")
+                        } else {
+                            component.isLoggedIn = true
+                            component.token = data.token
+                            localStorage.setItem('token', component.token);
+                            window.location.reload();
+                        }
                     })
                     .catch((error) => {
                         console.log(error)
