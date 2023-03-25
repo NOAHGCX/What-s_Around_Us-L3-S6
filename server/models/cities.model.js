@@ -10,10 +10,10 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.FLOAT
         },
         longitude: {
-            type: Sequelize.FLOAT
+            type: Sequelize.DOUBLE
         },
         latitude: {
-            type: Sequelize.FLOAT
+            type: Sequelize.DOUBLE
         },
     }, { timestamps: false});
 

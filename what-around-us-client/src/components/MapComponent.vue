@@ -26,14 +26,10 @@
                 mapId: 'leaflet-map',
                 chosenPlace: "Choose a Place",
                 mapOptions: {
-                    center: L.latLng(this.lgt, this.ltt),
+                    center: L.latLng(this.ltt,this.lgt),
                     zoom: 13,
                     zoomControl: true,
                     zoomAnimation: true,
-                    maxBounds: L.latLngBounds(
-                        L.latLng(18.91619, -171.791110603),
-                        L.latLng(71.3577635769, -66.96466)
-                    ),
                     layers: [],
                 },
                 geojsonData: null,
@@ -44,7 +40,6 @@
         },
         methods: {
             getPlace: function (place) {
-                console.log("choosen place: " + place.geocodes.main.latitude+""+ place.geocodes.main.longitude);
                 this.chosenPlace = place.name;
                 this.mapInstance.panTo( [place.geocodes.main.latitude, place.geocodes.main.longitude]);
             },
@@ -101,9 +96,9 @@
                 if (query == "" && type == "") {
 
                     axios.get("https://api.foursquare.com/v3/places/search?ll=" +
-                            lgt +
-                            "%2C" +
                             ltt +
+                            "%2C" +
+                            lgt+
                             "&radius=10000&limit=50",
                             params).then(response => {
                             console.log("Foursquare API");

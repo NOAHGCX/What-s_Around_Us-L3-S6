@@ -94,7 +94,7 @@
             'Authorization': localStorage.getItem('token')
           },
           body: JSON.stringify({
-            city: this.city,
+            name: this.city,
             country: this.country,
             grade: 5,
             latitude: this.ltt,
@@ -106,7 +106,9 @@
             return response.json()
           })
           .then((data) => {
-            console.log(data);
+            localStorage.setItem('cityId', data.city.id);
+            window.location.href="/#/about/?id="+data.city.id;
+            location.reload();
           })
           .catch((error) => {
             console.log(error);
@@ -117,20 +119,21 @@
        * @param {Object} address_componentsData Address components
        */
       getAddressData: function (address_componentsData) {
-        console.log(address_componentsData);
         this.city = address_componentsData.locality;
         this.ltt = address_componentsData.latitude;
         this.lgt = address_componentsData.longitude;
         this.country = address_componentsData.country;
-        console.log("city: " + this.city);
-        console.log("ltt: " + this.ltt);
-        console.log("lgt: " + this.lgt);
-        console.log("country: " + this.country);
+
+        localStorage.setItem('city', address_componentsData.locality);
+        localStorage.setItem('ltt', address_componentsData.latitude);
+        localStorage.setItem('lgt', address_componentsData.longitude);
+        localStorage.setItem('country', address_componentsData.country);
         this.checkCity();
       },
     },
-    mounted() {
+    async mounted() {
       this.$refs.address.focus();
+
       //  news api 6724ae4d57d24ef6b47776ef69e07a13 974f46c4dbf74801aa8dd40217ed3ab9
       const axios = require('axios').default;
       const fetchNewsData = async () => {
@@ -156,10 +159,10 @@
     data() {
       return {
         NewsResult: [],
-        city: "Montréal",
-        ltt: -73.58781,
-        lgt: 45.50884,
-        country: 'Canada',
+        city: localStorage.getItem('city') || "Montreal",
+        ltt: Number(localStorage.getItem('ltt')) || -73.58781,
+        lgt: Number(localStorage.getItem('lgt')) || 45.50884, 
+        country: localStorage.getItem('country') || "Canada",
         token: localStorage.getItem('token'),
         address: '',
       }

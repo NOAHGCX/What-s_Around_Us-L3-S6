@@ -1,5 +1,10 @@
 <template>
   <div class="container-fluid connection pt-5">
+    <div class="position-absolute end-0">
+      <router-link to="/about">
+        <button class="btn btn-warning">Home</button>
+      </router-link>
+    </div>
     <div class="row">
       <div class="col-md-6 mx-auto">
         <div class="card cardUser">
@@ -67,11 +72,9 @@
       }
       fetch('/api/profil', options)
         .then((response) => {
-          console.log(response)
           return response.json()
         })
         .then((data) => {
-          console.log(data)
           component.user = data.user
           component.cityComments = data.cityComments
           component.storeComments = data.storeComments

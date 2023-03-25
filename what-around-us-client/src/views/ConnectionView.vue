@@ -1,7 +1,8 @@
 <template>
     <div class="position-absolute end-0">
         <router-link to="/about">
-            <button class="btn btn-warning">Home</button></router-link>
+            <button class="btn btn-warning">Home</button>
+        </router-link>
     </div>
     <div>
         <div v-if="isLoggedIn">

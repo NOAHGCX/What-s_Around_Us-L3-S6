@@ -5,7 +5,7 @@
       <form onSubmit="">
         <ul>
           <li>
-            <vue3-star-ratings class="m-2 p-0 d-flex align-items-start" v-model="rating" @click="handleChange() "
+            <vue3-star-ratings class="m-2 p-0 d-flex align-items-start" v-model="rating" 
               :starSize="'20'" :showControl="false" />
           </li>
           <li>
@@ -38,13 +38,8 @@
       vue3StarRatings,
     },
     methods: {
-      handleChange() {
-        console.log(this.rating);
-      },
       postComment() {
         var component = this
-        console.log(component.comment);
-        console.log(component.rating);
         let options = {
           method: "POST",
           headers: {
@@ -52,7 +47,7 @@
             'Authorization': localStorage.getItem('token')
           },
           body: JSON.stringify({
-            idCity: 2,
+            idCity: component.cityId,
             comment: component.comment,
             grade: component.rating,
           })
@@ -79,12 +74,11 @@
                         'Content-Type': 'application/json'
                     },
                 }
-                fetch('/api/cityComments/2', options)
+                fetch('/api/cityComments/'+ this.cityId, options)
                     .then((response) => {
                         return response.json()
                     })
                     .then((data) => {
-                       console.log(data)
                        this.allComment = data.reverse()
                     })
                     .catch((error) => {
@@ -99,6 +93,7 @@
       return {
         allComment: [],
         comment: "",
+        cityId: Number(localStorage.getItem('cityId')),
         rating: 0,
       };
     }
@@ -158,6 +153,8 @@
 
   .comments-list {
     margin-top: 20px;
+    max-block-size: 150vh;
+    overflow-y: scroll;
   }
 
   .comment {
