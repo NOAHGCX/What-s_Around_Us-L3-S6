@@ -17,7 +17,6 @@ exports.create = async (req, res) => {
         validUntil: validity,
         userId: id
     };
-    console.log(validity)
 
     // Save in the database
     var result = {};
@@ -27,7 +26,6 @@ exports.create = async (req, res) => {
             res.send(data);
         })
         .catch(e => {
-            console.log("error", e)
             res.status(500).send({
                 message:
                     err.message || "Some error occurred while creating the record."
@@ -68,8 +66,7 @@ exports.findByUserId = async (req, res) => {
         result = data
     })
     .catch(e => {
-        console.log("Error", e)
-        result = data
+        result = e
     })
     return result
 };
@@ -83,7 +80,7 @@ exports.findByUserIdParam = async (id) => {
         result = data
     })
     .catch(e => {
-        console.log("Error", e)
+        result = e
     })
     return result
 };
@@ -97,7 +94,6 @@ exports.findByToken = async (token) => {
         result = data
     })
     .catch(e => {
-        console.log("Error", e)
         result = e
     })
     return result

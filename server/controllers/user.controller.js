@@ -94,7 +94,6 @@ exports.findByMail = async (req, res) => {
         result = data
     })
     .catch(e => {
-        console.log("Error", e)
         result = data 
     })
     return result
@@ -103,7 +102,6 @@ exports.findByMail = async (req, res) => {
 
 //update a record with a certain id (sent from the front-end)
 exports.update = (req, res) => {
-    console.log(req.body)
     const id = req.params.id;
     
     User.update(req.body, {

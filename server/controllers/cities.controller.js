@@ -92,7 +92,6 @@ exports.create = async  (req, res) => {
 
     // Update a record with a certain id
     exports.update = (req, res) => {
-        console.log(req.body)
         const id = req.params.id;
         
         cities.update(req.body, {

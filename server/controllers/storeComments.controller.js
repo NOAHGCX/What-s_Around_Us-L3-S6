@@ -95,7 +95,6 @@ exports.findByUserId = async (userId) => {
 
 // Get a record with a certain cityID and userID
 exports.findByStoreIdAndUserId = (req, res) => {
-    console.log(req.params)
     const idStore = req.params.storeId;
     const idUser = req.params.userId;
     storeComments.findAll({

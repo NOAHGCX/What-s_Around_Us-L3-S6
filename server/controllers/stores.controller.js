@@ -69,7 +69,6 @@ exports.create = (req, res) => {
 
     // Get a record with a certain address and name
     exports.search = (req, res) => {
-        console.log(req.body)
         stores.findAll({ where: { [Op.and]: [{ name: req.body.name }, { address: req.body.address }] } })
             .then(data => {
                 res.send(data);
@@ -83,7 +82,6 @@ exports.create = (req, res) => {
 
     // Update a record with a certain id
     exports.update = (req, res) => {
-        console.log(req.body)
         const id = req.params.id;
         
         stores.update(req.body, {

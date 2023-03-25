@@ -6,13 +6,8 @@ const cityComments = require("../models/cityComments.model")(Sequelize.connectio
 
 // Create
 exports.create = (req, res, idUser) => {
-    console.log("idCity" + req.body.idCity)
-    console.log("idUser" + idUser)
-    console.log("comment" + req.body.comment)
-    console.log("grade" + req.body.grade)
     // Validate request
     if (!req.body.idCity || !idUser || !req.body.comment ) {
-        console.log("je suis dans le if")
         res.status(400).send({
             message: "Content can not be empty!"
         });
@@ -98,7 +93,6 @@ exports.findByUserId = async (userId) => {
 
 // Get a record with a certain cityID and userID
 exports.findByCityIdAndUserId = (req, res) => {
-    console.log(req.params)
     const idCity = req.params.cityId;
     const idUser = req.params.userId;
     cityComments.findAll({

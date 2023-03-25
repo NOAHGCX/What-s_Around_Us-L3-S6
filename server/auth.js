@@ -5,7 +5,6 @@ const auth = require("./auth.js");
 exports.login = async (req, res) => {
     let user = await users.findByMail(req, res)
     // if the user exists and password matches
-    console.log(user.id,user.password,req.body.password)
     if (user && user.id && user.password == req.body.password) {
 
         // search for a session for this user
@@ -18,10 +17,8 @@ exports.login = async (req, res) => {
         // if the session exists and is not expired, continue
         // else, create a session
         if (session && !isTokenExpired) {
-            console.log("use existing")
             token = session.token 
         } else {
-            console.log("create new")
             session = await sessions.createId(user.id)
             if (session) {
                 token = session.token
@@ -41,7 +38,6 @@ exports.isLoggedIn = async (req, res) => {
         let session = await sessions.findByToken(token)
         if (session) {
             let isTokenExpired = (new Date(session.validUntil) - new Date()) <= 0
-            console.log(session.validUntil, isTokenExpired)
             if (session && !isTokenExpired) {
                 console.log("all good!")
                 return true
@@ -68,7 +64,6 @@ exports.signUp = async (req, res) => {
         } else {
             try {
                 const userCreation = await users.create(req, res)
-                console.log(userCreation)
                 if (userCreation) {
                     const session = await sessions.createId(userCreation.id)
                     if (session) {

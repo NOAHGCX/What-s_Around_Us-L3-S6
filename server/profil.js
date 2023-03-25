@@ -6,16 +6,13 @@ const auth = require("./auth.js");
 
 // Get all data from a user
 exports.getProfil = async (req, res) => {
-    console.log("getProfil")
     let cityCommentsData = [];
     let storeCommentsData = [];
     let userData = {};
     var token = req.get("Authorization")
-    console.log("token", token)
     if(token){
         let session = await sessions.findByToken(token)
         if (session) {
-            console.log(session.userId)
             let idUser = session.userId
             let isTokenExpired = (new Date(session.validUntil) - new Date()) <= 0
             if (session && !isTokenExpired) {
@@ -24,7 +21,6 @@ exports.getProfil = async (req, res) => {
                 storeCommentsData = await storeComments.findByUserId(idUser)
                 userData = await users.findById(idUser)
                 if( cityCommentsData && userData && storeCommentsData){
-                    console.log(JSON.stringify({user: userData, cityComments: cityCommentsData, storeComments: storeCommentsData}))
                     res.status(200).send(JSON.stringify({user: userData, cityComments: cityCommentsData, storeComments: storeCommentsData}))
                     return true
                 }
