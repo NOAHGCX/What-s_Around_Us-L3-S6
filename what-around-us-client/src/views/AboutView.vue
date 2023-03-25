@@ -25,13 +25,19 @@
         <div class="col">
           <ul class="nav justify-content-around">
             <li class="nav-item">
-              <a class="nav-link text-dark" href="#News">News</a>
+              <router-link to="#News" class="nav-link text-dark">
+                News
+              </router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-dark" href="#">Map</a>
+              <router-link to="#Map" class="nav-link text-dark">
+                Map
+              </router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-dark" href="#">Comment</a>
+              <router-link to="#Comment" class="nav-link text-dark">
+                Comment
+              </router-link>
             </li>
           </ul>
         </div>
@@ -53,10 +59,10 @@
       </div>
     </div>
     <div class="container-fluid Map">
-      <h1>Map</h1>
+      <h1 id="Map">Map</h1>
       <MapComponent :lgt="this.lgt" :ltt="this.ltt" />
     </div>
-    <div class="container-fluid Comment">
+    <div class="container-fluid Comment" id="Comment">
       <CommentComponent />
     </div>
   </div>
