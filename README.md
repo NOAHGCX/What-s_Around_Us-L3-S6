@@ -33,16 +33,16 @@ And finally you can start the server with :
 First if you want to use the fulll potential of it you can signUp or logedIn if it's already done.</br>
 
 Now you have to use the auto compleate input (powered by google map api) to select a city you want to discover.</br>
-After that you will be able to discover some news on the city (powered by NewsAPI).</br>
-you canclick on it to be redirect to the officia news page.</br>
+After that you will be able to discover some news on the city (powered by NewsAPI) 
+you can click on it to be redirect to the officia news page.</br>
 
 Under the news element they are the city map (powered by leaflet)</br>
-where we display some different hot spot (powereb by Foursquare API)</br>
-you can click on it to discover store info and select a store on the scroll down menue and the map will be centered on it
+where we display some different hot spot (powereb by Foursquare API) 
+you can click on it to discover store info and select a store on the scroll down menue and the map will be centered on it.</br>
 
-Under the map element they are the comment section.
+Under the map element they are the comment section.</br>
 It's where you can add a comment on the city if you are loged
-and discover the comment made by other users
+and discover the comment made by other users</br>
 
 <h2>Now let's talk a bit about backend part:</h2>
 
