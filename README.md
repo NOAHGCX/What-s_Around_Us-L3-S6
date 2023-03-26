@@ -21,6 +21,8 @@ Start the server part:
 
 You have to configure the db.config.js to fit with your mySQLWorkbench config.
 
+You can create the database by using the file named DataBase
+
 And finally you can start the server with :
 
     npm start serve
