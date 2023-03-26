@@ -4,7 +4,7 @@ Noah ATTIA and Antonin HERVE are proud to present you the what's around us web s
 
 <h1>Set up the project</h1>
 
-Fisrt, to to start it please :
+First, to to start it please :
 
     git clone https://github.com/NOAHGCX/What-s_Around_Us-L3-S6.git
 
