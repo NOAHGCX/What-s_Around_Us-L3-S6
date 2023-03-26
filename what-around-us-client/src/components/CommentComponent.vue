@@ -93,7 +93,7 @@
       return {
         allComment: [],
         comment: "",
-        cityId: Number(localStorage.getItem('cityId')),
+        cityId: Number(localStorage.getItem('cityId')) || 1,
         rating: 0,
       };
     }

@@ -87,17 +87,16 @@ exports.findByUserIdParam = async (id) => {
 
 // Get session by token 
 exports.findByToken = async (token) => {
+    return new Promise((resolve, reject) => {
     var condition = token ? { token: { [Op.eq]: token } } : null;
-    var result = {};
-    await Session.findOne({ where: condition })
+    Session.findOne({ where: condition })
     .then(data => {
-        result = data
+        resolve(data)
     })
     .catch(e => {
-        result = e
+        reject(e)
     })
-    return result
-};
+})};
 
 // Delete a record with a certain id
 exports.delete = async (req, res)  => {
